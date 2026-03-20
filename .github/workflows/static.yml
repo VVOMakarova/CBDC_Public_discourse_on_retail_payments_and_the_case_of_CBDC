@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 идей из одной статьи — Bindseil (2026)</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: #0D1B3E;
+  color: #E8EDF5;
+  min-height: 100vh;
+  padding: 32px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.outer { width: 100%; max-width: 860px; }
+
+/* ── HEADER ── */
+.gold-bar { height: 3px; background: #C9A84C; border-radius: 2px 2px 0 0; }
+.card-header {
+  background: #0F1E40;
+  border: 1px solid #1E3466; border-top: none; border-bottom: none;
+  padding: 20px 24px 18px;
+}
+.eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; color: #C9A84C; text-transform: uppercase; margin-bottom: 6px; }
+.card-title { font-size: 20px; font-weight: 600; color: #fff; line-height: 1.3; }
+.card-sub { font-size: 12px; color: #8FA8C8; margin-top: 5px; line-height: 1.6; }
+
+/* ── GRID WRAP ── */
+.grid-wrap {
+  background: #152547;
+  border: 1px solid #1E3466; border-top: none;
+  border-radius: 0 0 16px 16px;
+  padding: 16px;
+}
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ── CARD ── */
+.item {
+  background: #0F1E40;
+  border: 1px solid #1E3466;
+  border-radius: 12px;
+  padding: 13px 15px;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, transform 0.12s;
+  position: relative;
+}
+.item:hover { border-color: #C9A84C; background: #0a1530; transform: translateY(-1px); }
+.item-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 7px; }
+.num {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; flex-shrink: 0; margin-top: 1px;
+}
+.n-teal   { background: #04342C; color: #5DCAA5; }
+.n-purple { background: #26215C; color: #CECBF6; }
+.n-amber  { background: #412402; color: #FAC775; }
+.n-blue   { background: #042C53; color: #B5D4F4; }
+.n-coral  { background: #4A1B0C; color: #F5C4B3; }
+.item-title { font-size: 12.5px; font-weight: 500; color: #E8EDF5; line-height: 1.4; }
+.item-body  { font-size: 12px; color: #8FA8C8; line-height: 1.65; padding-left: 34px; }
+.tag {
+  display: inline-block; font-size: 9px; font-weight: 600;
+  padding: 2px 7px; border-radius: 6px; margin-top: 8px; margin-left: 34px;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.tg { background: rgba(29,158,117,0.15); color: #5DCAA5; border: 1px solid rgba(29,158,117,0.25); }
+.tp { background: rgba(127,119,221,0.15); color: #AFA9EC; border: 1px solid rgba(127,119,221,0.25); }
+.ta { background: rgba(186,117,23,0.15); color: #FAC775; border: 1px solid rgba(186,117,23,0.25); }
+.tb { background: rgba(55,138,221,0.15); color: #85B7EB; border: 1px solid rgba(55,138,221,0.25); }
+.tc { background: rgba(216,90,48,0.15); color: #F5C4B3; border: 1px solid rgba(216,90,48,0.25); }
+.arrow-hint {
+  position: absolute; bottom: 12px; right: 14px;
+  font-size: 14px; color: #1E3466; transition: color 0.18s;
+}
+.item:hover .arrow-hint { color: #C9A84C; }
+
+.divider { height: 1px; background: #1E3466; margin: 16px 0 12px; }
+.footer { font-size: 11px; color: #4A6494; text-align: center; line-height: 1.7; padding-bottom: 4px; }
+
+/* ── DETAIL PAGE ── */
+.detail {
+  display: none;
+  width: 100%;
+}
+.detail.active { display: block; }
+.detail-card {
+  background: #152547;
+  border: 1px solid #1E3466;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.detail-header {
+  background: #0F1E40;
+  padding: 18px 24px 16px;
+  border-bottom: 1px solid #1E3466;
+}
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; color: #8FA8C8;
+  background: none; border: 1px solid #1E3466;
+  border-radius: 20px; padding: 4px 12px;
+  cursor: pointer; margin-bottom: 14px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.back-btn:hover { border-color: #C9A84C; color: #C9A84C; }
+.detail-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: #C9A84C; text-transform: uppercase; margin-bottom: 5px; }
+.detail-title { font-size: 18px; font-weight: 600; color: #fff; line-height: 1.35; margin-bottom: 4px; }
+.detail-sub { font-size: 12px; color: #8FA8C8; line-height: 1.5; }
+.detail-body { padding: 20px 24px; }
+.section { margin-bottom: 20px; }
+.section:last-child { margin-bottom: 0; }
+.sec-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #4A6494;
+  margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 1px solid #1E3466;
+}
+.sec-text { font-size: 13px; color: #C8D4E8; line-height: 1.75; }
+.sec-text + .sec-text { margin-top: 10px; }
+.points { display: flex; flex-direction: column; gap: 8px; }
+.point { display: flex; gap: 10px; align-items: flex-start; }
+.pdot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.pt { font-size: 13px; color: #C8D4E8; line-height: 1.7; }
+.highlight {
+  background: #0F1E40;
+  border-left: 3px solid #C9A84C;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size: 13px; color: #E8EDF5; line-height: 1.7;
+  font-style: italic;
+}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+.mini-card {
+  background: #0F1E40;
+  border: 1px solid #1E3466;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.mini-label { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 6px; }
+.mini-body { font-size: 12px; color: #8FA8C8; line-height: 1.65; }
+.insight {
+  background: rgba(201,168,76,0.07);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 16px;
+}
+.insight-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #C9A84C; margin-bottom: 6px; }
+.insight-text { font-size: 13px; color: #E8D9A8; line-height: 1.7; }
+.nav-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 24px;
+  border-top: 1px solid #1E3466;
+  background: #0F1E40;
+}
+.nav-btn {
+  font-size: 11px; font-weight: 500; color: #8FA8C8;
+  background: none; border: 1px solid #1E3466;
+  border-radius: 20px; padding: 5px 14px;
+  cursor: pointer; transition: border-color 0.15s, color 0.15s;
+}
+.nav-btn:hover { border-color: #C9A84C; color: #C9A84C; }
+.nav-btn:disabled { opacity: 0.3; cursor: default; }
+.nav-btn:disabled:hover { border-color: #1E3466; color: #8FA8C8; }
+.nav-counter { font-size: 11px; color: #4A6494; }
+
+#main-view { width: 100%; }
+
+@media (max-width: 580px) {
+  .grid { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="outer">
+
+<!-- ══ MAIN VIEW ══ -->
+<div id="main-view">
+  <div class="gold-bar"></div>
+  <div class="card-header">
+    <div class="eyebrow">Дайджест серии · ЦВЦБ-канал · 2026</div>
+    <div class="card-title">10 идей из одной статьи</div>
+    <div class="card-sub">Разбор: Bindseil U. (2026) · Public discourse on retail payments and the case of CBDC<br>Нажмите на карточку, чтобы открыть полный разбор идеи</div>
+  </div>
+  <div class="grid-wrap">
+    <div class="grid" id="card-grid"></div>
+    <div class="divider"></div>
+    <div class="footer">
+      Bindseil U. (2026) · SSRN 6422438 · Серия из 9 постов · Telegram-канал о ЦВЦБ и цифровых деньгах
+    </div>
+  </div>
+</div>
+
+<!-- ══ DETAIL VIEW ══ -->
+<div id="detail-view" class="detail">
+  <div class="detail-card">
+    <div class="detail-header">
+      <button class="back-btn" onclick="showMain()">← все идеи</button>
+      <div class="detail-eyebrow" id="d-eyebrow"></div>
+      <div class="detail-title" id="d-title"></div>
+      <div class="detail-sub" id="d-sub"></div>
+    </div>
+    <div class="detail-body" id="d-body"></div>
+    <div class="nav-row">
+      <button class="nav-btn" id="nav-prev" onclick="navigate(-1)">← предыдущая</button>
+      <span class="nav-counter" id="nav-counter"></span>
+      <button class="nav-btn" id="nav-next" onclick="navigate(1)">следующая →</button>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+const ideas = [
+  {
+    num: 1, cls: "n-teal", tag: "tg", tagText: "Концептуальная рамка",
+    title: "Дискурс о платежах искажён структурно — не случайно",
+    body: "Сетевые эффекты, концентрация экспертизы у заинтересованных, асимметрия ресурсов — пять причин, по которым объективного публичного обсуждения платёжной архитектуры не бывает.",
+    eyebrow: "Идея № 1 · Концептуальная рамка",
+    sub: "Почему публичное обсуждение платёжной архитектуры структурно предвзято — и что с этим делать",
+    detail: `
+<div class="section">
+  <div class="sec-label">Центральный тезис</div>
+  <div class="sec-text">Биндзайль фиксирует: публичные дебаты о платёжной архитектуре не могут быть объективными по структурным причинам — вне зависимости от доброй воли участников. Это не исключение, а правило работы отрасли.</div>
+</div>
+<div class="section">
+  <div class="sec-label">Пять структурных причин</div>
+  <div class="points">
+    <div class="point"><span class="pdot" style="background:#5DCAA5"></span><span class="pt"><strong style="color:#E8EDF5">Техническая сложность.</strong> Розничные платёжные архитектуры многоуровневы и непрозрачны для неспециалистов. Детали дизайна (стандарты, протоколы, схемы расчётов) недоступны широкой аудитории.</span></div>
+    <div class="point"><span class="pdot" style="background:#5DCAA5"></span><span class="pt"><strong style="color:#E8EDF5">Экспертиза = корыстный интерес.</strong> Те, кто знает отрасль лучше всех — работают в ней и финансово заинтересованы в конкретных исходах. Независимой экспертизы структурно мало.</span></div>
+    <div class="point"><span class="pdot" style="background:#5DCAA5"></span><span class="pt"><strong style="color:#E8EDF5">Асимметрия ресурсов.</strong> Visa и Mastercard — компании с капитализацией $500–630 млрд. Они могут финансировать коммуникационные кампании, лоббирование и экспертные организации в масштабах, недостижимых для публичных институтов.</span></div>
+    <div class="point"><span class="pdot" style="background:#5DCAA5"></span><span class="pt"><strong style="color:#E8EDF5">Обратная реклама.</strong> Слабые проекты шумят громко — им нужны сетевые эффекты. Сильные молчат до запуска — чтобы не дать конкурентам время на реакцию. Публичный дискурс заполнен голосами тех, кто продаёт надежду.</span></div>
+    <div class="point"><span class="pdot" style="background:#5DCAA5"></span><span class="pt"><strong style="color:#E8EDF5">Неопределённость исходов.</strong> Разные архитектуры дают схожий социальный эффект, но кардинально расходятся в распределении ренты. Это создаёт стимулы тратить огромные ресурсы на борьбу за нарратив — непропорционально разнице в реальном общественном благе.</span></div>
+  </div>
+</div>
+<div class="section">
+  <div class="highlight">«Победа той или иной платёжной системы определяется не только её качеством, но и тем, чья коммуникационная стратегия оказалась эффективнее»</div>
+</div>
+<div class="insight">
+  <div class="insight-label">Почему это важно для ЦВЦБ</div>
+  <div class="insight-text">Эта рамка — ключ к пониманию всей дискуссии о цифровом рубле, цифровом евро и аналогах. Аргументы против ЦВЦБ нельзя рассматривать как нейтральный технический анализ — они структурно предвзяты. Это не делает их неверными, но требует систематического декодирования мотивов.</div>
+</div>`
+  },
+  {
+    num: 2, cls: "n-coral", tag: "tc", tagText: "Банки · нарративы",
+    title: "Банки переворачивают причинно-следственную связь",
+    body: "ЦВЦБ — реакция на уход наличных, а не атака на банки. Банки преподносят это как агрессивную экспансию ЦБ — и умалчивают об этом ключевом факте.",
+    eyebrow: "Идея № 2 · Банки и нарративы",
+    sub: "Три тезиса банков против ЦВЦБ — и один факт, о котором они не говорят",
+    detail: `
+<div class="section">
+  <div class="sec-label">Что говорят банки</div>
+  <div class="two-col">
+    <div class="mini-card"><div class="mini-label" style="color:#F5C4B3">Тезис 1</div><div class="mini-body">ЦВЦБ спровоцирует отток депозитов и подорвёт банковское кредитование — угроза финансовой стабильности</div></div>
+    <div class="mini-card"><div class="mini-label" style="color:#F5C4B3">Тезис 2</div><div class="mini-body">Рынок уже справляется: эффективные цифровые платёжные инструменты существуют, проблемы нет</div></div>
+    <div class="mini-card"><div class="mini-label" style="color:#F5C4B3">Тезис 3</div><div class="mini-body">ЦБ превышает мандат, вмешиваясь в конкурентный рынок, который работает без него</div></div>
+    <div class="mini-card"><div class="mini-label" style="color:#F5C4B3">Умолчание</div><div class="mini-body">ЦВЦБ — реакция на сокращение наличных, а не атака. Банки сами вытесняли ЦБ с розничного рынка</div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-label">Перевёрнутая логика</div>
+  <div class="sec-text">Центральные банки исторически присутствовали в розничных платежах через наличные деньги. По мере того как потребители переходят на электронные платежи, доля наличных падает — и ЦБ органично теряет розничное присутствие. ЦВЦБ — это попытка сохранить роль центрального банка в новой реальности, а не экспансия.</div>
+  <div class="sec-text" style="margin-top:10px;">Банки же представляют ситуацию иначе: мол, ЦБ, видя процветающий частный рынок, решил агрессивно захватить долю. Эта инверсия причины и следствия — намеренная риторическая стратегия.</div>
+</div>
+<div class="section">
+  <div class="highlight">Банки редко признают, что ЦВЦБ — это реакция на их же успех в вытеснении наличных. Они преподносят защитную меру ЦБ как наступательную.</div>
+</div>
+<div class="insight">
+  <div class="insight-label">Для России</div>
+  <div class="insight-text">Нарратив об угрозе финансовой стабильности активно звучит и в российских дискуссиях о цифровом рубле. Разграничение между обоснованным риском (требует дизайнерских решений — холдинговые лимиты) и стратегической риторикой (требует аналитической критики) принципиально.</div>
+</div>`
+  },
+  {
+    num: 3, cls: "n-amber", tag: "ta", tagText: "Информационная асимметрия",
+    title: "Чем шумнее проект — тем он слабее",
+    body: "Зрелые проекты хранятся в секрете до запуска. Слабые шумят с самого начала — им нужны сетевые эффекты прямо сейчас. Это объясняет доминирование Bitcoin в дискурсе.",
+    eyebrow: "Идея № 3 · Информационная асимметрия",
+    sub: "Парадокс обратной рекламы в платёжной индустрии",
+    detail: `
+<div class="section">
+  <div class="sec-label">Механизм</div>
+  <div class="sec-text">В большинстве отраслей реклама сигнализирует о качестве: компании с хорошим продуктом могут позволить себе дорогостоящие кампании, и это само по себе несёт информацию. В розничных платежах логика перевёрнута.</div>
+</div>
+<div class="section">
+  <div class="sec-label">Почему сильные молчат</div>
+  <div class="points">
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt">Зрелый проект с реальными шансами на успех держится в секрете, чтобы не дать конкурентам время для копирования или превентивного противодействия</span></div>
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt">Маркетинг включается только перед запуском — когда продукт уже готов к выводу на рынок</span></div>
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt">Устоявшиеся игроки акцентируют стабильность и надёжность, избегая публичных дискуссий о будущем</span></div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-label">Почему слабые шумят</div>
+  <div class="points">
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt">Проекты с неопределённым будущим вынуждены генерировать публичность с самого начала — им нужны сетевые эффекты и инвесторы прямо сейчас</span></div>
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt">Без ресурсов на традиционный маркетинг они используют социальные медиа и громкие заявления</span></div>
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt">Экзагерация аргументов — рациональная стратегия для проектов «вне денег»</span></div>
+  </div>
+</div>
+<div class="section">
+  <div class="highlight">Bitcoin и ряд стейблкоинов доминировали в дискуссиях о будущем денег при весьма ограниченной применимости в розничных платежах — именно потому, что активно искали нарративного присутствия.</div>
+</div>
+<div class="insight">
+  <div class="insight-label">Следствие для наблюдателя</div>
+  <div class="insight-text">Затяжное молчание некоторых центральных банков по ЦВЦБ может трактоваться как косвенный признак реального прогресса. Громкость публичной дискуссии вокруг проекта — обратный индикатор его зрелости, а не прямой.</div>
+</div>`
+  },
+  {
+    num: 4, cls: "n-blue", tag: "tb", tagText: "BigTech · регулирование",
+    title: "«Мы просто интерфейс» — стратегия уклонения BigTech",
+    body: "Apple Pay контролирует NFC на 1,5 млрд устройств и зарабатывает миллиарды на интерчейндже — позиционируя себя как технического посредника вне платёжного регулирования.",
+    eyebrow: "Идея № 4 · BigTech и регулирование",
+    sub: "Как технологические платформы захватывают платёжную инфраструктуру, оставаясь вне регуляторного поля",
+    detail: `
+<div class="section">
+  <div class="sec-label">Нарратив BigTech</div>
+  <div class="sec-text">Apple Pay, Google Pay и аналоги позиционируют себя как технических посредников: мол, мы только отображаем банковскую карту на экране телефона и обеспечиваем безопасную аутентификацию. Никакого платёжного сервиса — просто удобный интерфейс. Зачем на нас распространять банковское регулирование?</div>
+</div>
+<div class="section">
+  <div class="sec-label">Факты, которые нарратив скрывает</div>
+  <div class="points">
+    <div class="point"><span class="pdot" style="background:#85B7EB"></span><span class="pt">Apple контролирует NFC-чип на более чем 1,5 млрд iPhone — единственный канал для бесконтактных платежей на этих устройствах</span></div>
+    <div class="point"><span class="pdot" style="background:#85B7EB"></span><span class="pt">Получает ~0,15% с каждой транзакции в США — по оценкам аналитиков, несколько миллиардов долларов в год</span></div>
+    <div class="point"><span class="pdot" style="background:#85B7EB"></span><span class="pt">Концентрирует массив поведенческих и транзакционных данных сотен миллионов пользователей</span></div>
+    <div class="point"><span class="pdot" style="background:#85B7EB"></span><span class="pt">ЕК в 2022 году предварительно признала злоупотребление доминирующим положением через ограничение доступа к NFC</span></div>
+  </div>
+</div>
+<div class="section">
+  <div class="highlight">Фактически — платёжная монополия на уровне устройства, оформленная как «удобный интерфейс». Регуляторная асимметрия с банками — не случайность, а результат успешного нарратива.</div>
+</div>
+<div class="insight">
+  <div class="insight-label">Вопрос для ЦВЦБ</div>
+  <div class="insight-text">Если цифровой рубль или цифровой евро будут распространяться через мобильные кошельки Apple и Google — кто реально контролирует пользовательский опыт и данные: центральный банк или платформа? Выбор дистрибуционного канала — это архитектурное решение с политическими последствиями.</div>
+</div>`
+  },
+  {
+    num: 5, cls: "n-purple", tag: "tp", tagText: "Анти-ЦВЦБ нарратив",
+    title: "«Решение без проблемы» — убедительный, но ложный аргумент",
+    body: "Тезис Уоллера выглядит трезво, но защищает статус-кво: он работает только если нынешняя олигополия — оптимальный результат. Именно это и является предметом спора.",
+    eyebrow: "Идея № 5 · Анти-ЦВЦБ нарратив",
+    sub: "Почему самый популярный аргумент против ЦВЦБ содержит скрытую предпосылку",
+    detail: `
+<div class="section">
+  <div class="sec-label">Аргумент</div>
+  <div class="sec-text">Кристофер Уоллер (ФРС, 2021): «ЦВЦБ — это решение в поиске проблемы. Эффективные цифровые платёжные инструменты уже существуют. Нет убедительных оснований, по которым домохозяйствам нужны электронные деньги центрального банка для розничных платежей.» Питер Бофингер (2023) повторил тезис применительно к цифровому евро.</div>
+</div>
+<div class="section">
+  <div class="sec-label">Две уязвимости аргумента</div>
+  <div class="points">
+    <div class="point"><span class="pdot" style="background:#AFA9EC"></span><span class="pt"><strong style="color:#E8EDF5">Якорная функция игнорируется.</strong> Критики утверждают: «якорная» функция ЦБ (обеспечение единства денежной системы через конвертируемость коммерческих денег в деньги ЦБ) работает и без розничного ЦВЦБ — через оптовый уровень. Но для этого нужны неограниченные холдинговые лимиты, что создаёт финансовую нестабильность. Противоречие замалчивается.</span></div>
+    <div class="point"><span class="pdot" style="background:#AFA9EC"></span><span class="pt"><strong style="color:#E8EDF5">Скрытая предпосылка.</strong> «Рынок уже справляется» верно только если нынешняя частная олигополия — оптимальный результат для общества. Но именно это и есть предмет спора. Тезис предрешает ответ, включив спорное утверждение в базовую предпосылку.</span></div>
+  </div>
+</div>
+<div class="section">
+  <div class="highlight">Аргумент «нет проблемы — нет решения» выглядит трезво и взвешенно. Но он структурно защищает статус-кво — то есть выгоден тем, кто уже занимает доминирующее положение на рынке.</div>
+</div>
+<div class="insight">
+  <div class="insight-label">Операциональный вывод</div>
+  <div class="insight-text">Встречая этот аргумент в любой национальной дискуссии — включая российскую — полезно спросить: кто его произносит и каков его финансовый интерес в сохранении нынешней платёжной архитектуры? Интеллектуальная привлекательность аргумента не равна его нейтральности.</div>
+</div>`
+  },
+  {
+    num: 6, cls: "n-teal", tag: "tg", tagText: "Архитектурные сценарии",
+    title: "PIX решает ~50% задач ЦВЦБ — но не все",
+    body: "Низкие комиссии и конкуренция — да. Якорная функция ЦБ на розничном уровне и инфраструктурная независимость — нет. Для России в условиях санкций это не абстракция.",
+    eyebrow: "Идея № 6 · Архитектурные сценарии",
+    sub: "Матрица сценариев Биндзайля и место России в ней",
+    detail: `
+<div class="section">
+  <div class="sec-label">Пять сценариев Биндзайля</div>
+  <div class="points">
+    <div class="point"><span class="pdot" style="background:#5DCAA5"></span><span class="pt"><strong style="color:#E8EDF5">Сценарий 0 (100%)</strong> — полноценный ЦВЦБ с открытой конкурентной экосистемой, адекватными холдинговыми лимитами и технической независимостью</span></div>
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt"><strong style="color:#E8EDF5">Сценарий 1 (20%)</strong> — ЦВЦБ с подорванным дизайном (модель Наварете): высокие издержки при нулевой конкурентной ценности</span></div>
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt"><strong style="color:#E8EDF5">Сценарий 2 (40%)</strong> — лёгкий ЦВЦБ как закрытое приложение ЦБ без отраслевой экосистемы</span></div>
+    <div class="point"><span class="pdot" style="background:#AFA9EC"></span><span class="pt"><strong style="color:#E8EDF5">Сценарий 3 (25%)</strong> — усиленное регулирование частных схем без ЦВЦБ: прозрачность комиссий, отмена запрета на сёрчардж</span></div>
+    <div class="point"><span class="pdot" style="background:#85B7EB"></span><span class="pt"><strong style="color:#E8EDF5">Сценарий 4 (50%)</strong> — PIX/UPI-модель: публично управляемая схема на коммерческих деньгах с нулевыми или низкими комиссиями</span></div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-label">Что PIX не решает</div>
+  <div class="two-col">
+    <div class="mini-card"><div class="mini-label" style="color:#F5C4B3">Якорная функция</div><div class="mini-body">Деньги в PIX/СБП — коммерческие банковские деньги. Якорная роль ЦБ сохраняется только на оптовом уровне, не на розничном</div></div>
+    <div class="mini-card"><div class="mini-label" style="color:#F5C4B3">Инфраструктурная независимость</div><div class="mini-body">Расчёты всё равно проходят через банки-посредники. При санкционном давлении на конкретный банк цепочка рвётся</div></div>
+  </div>
+</div>
+<div class="insight">
+  <div class="insight-label">Россия: гибрид, которого нет в модели</div>
+  <div class="insight-text">Биндзайль рассматривает сценарии 0 и 4 как альтернативы. Россия строит их как комплементарные слои: СБП закрывает задачу «здесь и сейчас», цифровой рубль — задачу инфраструктурного суверенитета и трансграничных расчётов вне долларовой системы. Последнее в матрице Биндзайля почти не рассматривается.</div>
+</div>`
+  },
+  {
+    num: 7, cls: "n-coral", tag: "tc", tagText: "Лоббизм · дизайн",
+    title: "Цифровой евро убивали изнутри — через технические поправки",
+    body: "Лимиты ~100 евро + приоритет офлайна + условный онлайн — каждая поправка выглядит разумно. В совокупности: дорогой проект с нулевой конкурентной ценностью.",
+    eyebrow: "Идея № 7 · Лоббизм и дизайн ЦВЦБ",
+    sub: "Кейс Наварете как учебник по тому, как торпедировать ЦВЦБ изнутри законодательного процесса",
+    detail: `
+<div class="section">
+  <div class="sec-label">Три ключевые поправки</div>
+  <div class="points">
+    <div class="point"><span class="pdot" style="background:#F5C4B3"></span><span class="pt"><strong style="color:#E8EDF5">Холдинговые лимиты ~100 евро.</strong> Поправки 155–156 предлагают метод расчёта лимитов исходя из сценария полного использования всеми держателями одновременно. Итог: цифровой евро превращается в транзакционный инструмент поверх банковских денег без самостоятельной функции хранения стоимости.</span></div>
+    <div class="point"><span class="pdot" style="background:#F5C4B3"></span><span class="pt"><strong style="color:#E8EDF5">Приоритет офлайна.</strong> Поправка 13: запуск начинается только с офлайн-версии. Нишевый продукт с ограниченным масштабированием становится стартовой позицией — с высокими издержками и слабыми сетевыми эффектами.</span></div>
+    <div class="point"><span class="pdot" style="background:#F5C4B3"></span><span class="pt"><strong style="color:#E8EDF5">Условный онлайн.</strong> Поправка 14: онлайн-версия запускается только если Еврокомиссия признает отсутствие суверенного панъевропейского решения. EPI получает де-факто право вето на публичный проект ЦБ.</span></div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-label">Механизм коалиции</div>
+  <div class="sec-text">Показательно: офлайн-приоритет поддержали банки (нишевый и неконкурентный продукт), активисты приватности (офлайн анонимнее) и сам ЕЦБ (нарратив «цифровые наличные» коммуникационно удобен). Никто не поднял вопрос об издержках и реальном масштабе. Разные интересы создали неожиданную коалицию, замолчавшую неудобные факты.</div>
+</div>
+<div class="section">
+  <div class="highlight">Нет публичного «мы против ЦВЦБ». Есть технические поправки, каждая из которых выглядит разумной по отдельности. В совокупности — сценарий 1 по Биндзайлю: дорого и неэффективно одновременно.</div>
+</div>
+<div class="insight">
+  <div class="insight-label">Универсальный урок</div>
+  <div class="insight-text">Механизм «torpedeado by design» применим к любому национальному проекту ЦВЦБ. Дизайн холдинговых лимитов, выбор онлайн/офлайн-приоритета, схема компенсации банкам — всё это не технические детали, а политические решения с долгосрочными последствиями для состоятельности проекта.</div>
+</div>`
+  },
+  {
+    num: 8, cls: "n-amber", tag: "ta", tagText: "Приватность · коалиции",
+    title: "Нарратив «ЦВЦБ = слежка» выгоден разным акторам одновременно",
+    body: "Либертарианцы, крипто-индустрия, правоконсерваторы, часть банков — каждый по своей причине. Схожесть позиций при разных интересах — признак стратегически сконструированного нарратива.",
+    eyebrow: "Идея № 8 · Приватность и коалиции",
+    sub: "Почему антинарратив о слежке так устойчив — и кому это выгодно",
+    detail: `
+<div class="section">
+  <div class="sec-label">Коалиция против ЦВЦБ</div>
+  <div class="points">
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt"><strong style="color:#E8EDF5">Либертарианцы и гражданские активисты.</strong> Искренняя позиция: централизация транзакционных данных в руках государства — угроза индивидуальной свободе. Программируемые деньги — потенциальный инструмент цензуры.</span></div>
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt"><strong style="color:#E8EDF5">Крипто-индустрия.</strong> Стратегическая позиция: Bitcoin и децентрализованные альтернативы позиционируются как защита от ЦВЦБ-контроля. Нарратив поддерживает спрос на крипто-активы.</span></div>
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt"><strong style="color:#E8EDF5">Правоконсервативные политики.</strong> Электоральная позиция: АдГ в Германии, Де Сантис в США используют ЦВЦБ как символ государственного контроля для мобилизации избирателей.</span></div>
+    <div class="point"><span class="pdot" style="background:#FAC775"></span><span class="pt"><strong style="color:#E8EDF5">Банки (опосредованно).</strong> Тактическая позиция: напрямую не выступают против ЦВЦБ через «слежку» — но не опровергают нарратив, так как он работает в их интересах.</span></div>
+  </div>
+</div>
+<div class="section">
+  <div class="highlight">Схожесть позиций при кардинально разных интересах — сигнал. Нарратив функционален для нескольких групп одновременно. Это признак не органического общественного консенсуса, а стратегически полезной конвергенции.</div>
+</div>
+<div class="section">
+  <div class="sec-label">Что это не означает</div>
+  <div class="sec-text">Аргументы о приватности не становятся неверными от того, что ими пользуются из корыстных соображений. Дизайн приватности в ЦВЦБ — принципиальная проблема, требующая архитектурных решений: псевдоанонимность малых платежей, минимизация данных, независимый надзор за доступом к транзакционной истории.</div>
+</div>
+<div class="insight">
+  <div class="insight-label">Для центральных банков</div>
+  <div class="insight-text">Ответ на этот нарратив — не декларации о защите приватности, а конкретные, верифицируемые технические решения в дизайне ЦВЦБ. Слова без архитектурных гарантий только подпитывают нарратив.</div>
+</div>`
+  },
+  {
+    num: 9, cls: "n-purple", tag: "tp", tagText: "Публичная политика",
+    title: "Нейтральный ЦБ — институциональная фикция",
+    body: "ЕЦБ продвигает цифровой евро. ФРС запрещена законом. НБК действует директивно. Лучший случай — не нейтральность, а прозрачность ненейтральности с институциональными сдержками.",
+    eyebrow: "Идея № 9 · Публичная политика",
+    sub: "Центральный банк как игрок, регулятор и потенциально захваченный институт одновременно",
+    detail: `
+<div class="section">
+  <div class="sec-label">Три роли одновременно</div>
+  <div class="two-col">
+    <div class="mini-card"><div class="mini-label" style="color:#9FE1CB">Нейтральный арбитр</div><div class="mini-body">Публикует данные о комиссиях, ведёт консультации со всеми сторонами, устанавливает стандарты интероперабельности без выбора победителя</div></div>
+    <div class="mini-card"><div class="mini-label" style="color:#AFA9EC">Игрок с мандатом</div><div class="mini-body">Выпускает собственный инструмент (ЦВЦБ, TIPS, FedNow), устанавливает условия доступа к расчётной инфраструктуре, лицензирует участников</div></div>
+    <div class="mini-card"><div class="mini-label" style="color:#F5C4B3">Захваченный регулятор</div><div class="mini-body">Зависит от экспертизы индустрии, получает стратегически отфильтрованную информацию, избегает решений, угрожающих банкам-партнёрам</div></div>
+    <div class="mini-card"><div class="mini-label" style="color:#FAC775">Институциональный интерес</div><div class="mini-body">Без ЦВЦБ ЦБ теряет роль в розничных платежах по мере ухода наличных — встроенный мотив продвигать цифровые деньги ЦБ</div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-label">Лучший случай — Бразилия</div>
+  <div class="sec-text">Банк Бразилии не претендовал на нейтральность: открыто выбрал сторону публичного интереса и институционализировал это решение через обязательные правила. Банки обязаны подключиться, комиссии для мерчантов запрещены. Это — осознанная ненейтральность с прозрачными правилами, а не нейтральный арбитраж.</div>
+</div>
+<div class="section">
+  <div class="highlight">Разница между ЕЦБ и НБК не в том, что один нейтрален, а другой нет. Разница в том, насколько институциональные ограничения, независимый надзор и публичная подотчётность сдерживают злоупотребление позицией.</div>
+</div>
+<div class="insight">
+  <div class="insight-label">Операциональный вывод</div>
+  <div class="insight-text">Правильная публичная политика — не претендовать на нейтральность там, где её нет, а создавать институциональные гарантии против злоупотреблений. Прозрачность мотивов + независимый надзор + чёткие правовые рамки важнее, чем нарратив нейтральности.</div>
+</div>`
+  },
+  {
+    num: 10, cls: "n-blue", tag: "tb", tagText: "Выводы для политики",
+    title: "Регулятор обязан исходить из презумпции предвзятости",
+    body: "Любая аргументация участников рынка структурно предвзята. Независимая экспертиза, прозрачность комиссий и активная коммуникация целей — три обязательных условия вменяемой платёжной политики.",
+    eyebrow: "Идея № 10 · Выводы для политики",
+    sub: "Три обязательства регулятора в условиях структурно искажённого платёжного дискурса",
+    detail: `
+<div class="section">
+  <div class="sec-label">Исходная установка</div>
+  <div class="sec-text">Регулятор, который верит в возможность нейтрального экспертного консенсуса в платёжной индустрии, обречён на захват. Правильная отправная точка другая: публичный дискурс о платёжной архитектуре всегда определяется стратегической коммуникацией заинтересованных сторон. Это не повод для цинизма — это операциональное условие работы.</div>
+</div>
+<div class="section">
+  <div class="sec-label">Три обязательства</div>
+  <div class="points">
+    <div class="point"><span class="pdot" style="background:#85B7EB"></span><span class="pt"><strong style="color:#E8EDF5">Независимая аналитическая экспертиза.</strong> Развивать собственный потенциал анализа, не зависящий от отраслевых источников. ЦБ и регуляторы структурно зависят от экспертизы индустрии — это уязвимость, требующая осознанного противодействия.</span></div>
+    <div class="point"><span class="pdot" style="background:#85B7EB"></span><span class="pt"><strong style="color:#E8EDF5">Прозрачность платёжной экономики.</strong> Публично раскрывать структуру комиссий, рыночную концентрацию и распределение рент в платёжной индустрии. Сейчас эти данные системно непрозрачны — что само по себе является конкурентным преимуществом для incumbents.</span></div>
+    <div class="point"><span class="pdot" style="background:#85B7EB"></span><span class="pt"><strong style="color:#E8EDF5">Активная коммуникация целей и компромиссов.</strong> Не отдавать информационное поле лоббистам. Публично объяснять цели платёжной политики, признавать компромиссы и риски — вместо того чтобы избегать сложных вопросов.</span></div>
+  </div>
+</div>
+<div class="section">
+  <div class="highlight">«Пожалуй, единственная надёжная гарантия сохранения общественного интереса в розничных платежах — это сохранение сбалансированного сосуществования публичных и частных денег» — Biндзайль (2026)</div>
+</div>
+<div class="section">
+  <div class="sec-label">Итоговый вывод статьи</div>
+  <div class="sec-text">Если отрасли удастся убедить законодателей жёстко ограничить ЦВЦБ — альтернативы (усиленное регулирование или PIX/UPI-модель) могут достичь части целей ЦВЦБ. Но полноценного эквивалента нет. Центральные банки должны настаивать на присутствии публичных денег в розничных платежах — и делать это, опираясь на независимую аналитику, а не только на институциональный авторитет.</div>
+</div>
+<div class="insight">
+  <div class="insight-label">Применимо к России</div>
+  <div class="insight-text">Банк России находится в уязвимой позиции: он одновременно разрабатывает дизайн цифрового рубля, устанавливает правила участия и зависит от банков как агентов внедрения. Три обязательства Биндзайля — независимая экспертиза, прозрачность и активная коммуникация — прямо применимы к этой конфигурации.</div>
+</div>`
+  }
+];
+
+let currentIdx = 0;
+
+function buildGrid() {
+  const grid = document.getElementById('card-grid');
+  grid.innerHTML = ideas.map((idea, i) => `
+    <div class="item" onclick="showDetail(${i})">
+      <div class="item-top">
+        <div class="num ${idea.cls}">${idea.num}</div>
+        <div class="item-title">${idea.title}</div>
+      </div>
+      <div class="item-body">${idea.body}</div>
+      <span class="tag ${idea.tag}">${idea.tagText}</span>
+      <span class="arrow-hint">→</span>
+    </div>
+  `).join('');
+}
+
+function showDetail(idx) {
+  currentIdx = idx;
+  const idea = ideas[idx];
+  document.getElementById('main-view').style.display = 'none';
+  const dv = document.getElementById('detail-view');
+  dv.classList.add('active');
+  document.getElementById('d-eyebrow').textContent = idea.eyebrow;
+  document.getElementById('d-title').textContent = idea.title;
+  document.getElementById('d-sub').textContent = idea.sub;
+  document.getElementById('d-body').innerHTML = idea.detail;
+  document.getElementById('nav-counter').textContent = `${idx + 1} / ${ideas.length}`;
+  document.getElementById('nav-prev').disabled = idx === 0;
+  document.getElementById('nav-next').disabled = idx === ideas.length - 1;
+  window.scrollTo(0, 0);
+}
+
+function showMain() {
+  document.getElementById('main-view').style.display = 'block';
+  document.getElementById('detail-view').classList.remove('active');
+  window.scrollTo(0, 0);
+}
+
+function navigate(dir) {
+  const next = currentIdx + dir;
+  if (next >= 0 && next < ideas.length) showDetail(next);
+}
+
+buildGrid();
+</script>
+</body>
+</html>
