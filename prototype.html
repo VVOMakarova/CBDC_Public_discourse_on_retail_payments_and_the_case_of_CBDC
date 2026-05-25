@@ -292,6 +292,8 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
 .feed-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-left:12px;vertical-align:middle}
 .feed-badge.live{background:rgba(93,202,165,.12);color:#5DCAA5;border:1px solid rgba(93,202,165,.25)}
 .feed-badge.cached{background:rgba(201,168,76,.1);color:#C9A84C;border:1px solid rgba(201,168,76,.2)}
+.lang-toggle{background:none;border:1px solid var(--border);color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:4px;cursor:pointer;transition:color .2s,border-color .2s;font-family:var(--sans)}
+.lang-toggle:hover{border-color:var(--gold);color:var(--gold)}
 </style>
 </head>
 <body>
@@ -310,16 +312,17 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
         </svg>
       </div>
       <div>
-        <div class="logo-text">Архитектура денег</div>
-        <div class="logo-sub">экспертная платформа</div>
+        <div class="logo-text" data-i18n="logo.name">Архитектура денег</div>
+        <div class="logo-sub" data-i18n="logo.sub">экспертная платформа</div>
       </div>
     </a>
     <div class="nav-links">
-      <a href="#materials">Материалы</a>
-      <a href="#research">Исследования</a>
-      <a href="#rubrics">Рубрики</a>
-      <a href="#about-proj">О проекте</a>
-      <a href="#order" class="nav-cta">Заказать</a>
+      <a href="#materials" data-i18n="nav.materials">Материалы</a>
+      <a href="#research" data-i18n="nav.research">Исследования</a>
+      <a href="#rubrics" data-i18n="nav.rubrics">Рубрики</a>
+      <a href="#about-proj" data-i18n="nav.about">О проекте</a>
+      <button id="lang-btn" class="lang-toggle" onclick="applyLang(lang==='ru'?'en':'ru')">EN</button>
+      <a href="#order" class="nav-cta" data-i18n="nav.order">Заказать</a>
     </div>
   </div>
 </nav>
@@ -328,18 +331,18 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
 <section class="hero" id="top">
   <div class="hero-grid"></div>
   <div class="hero-inner">
-    <div class="hero-eyebrow">Экспертная платформа о денежной инфраструктуре</div>
-    <h1 class="hero-h1">Деньги меняют<br><span>архитектуру.</span><br>Мы объясняем, как.</h1>
-    <p class="hero-sub">Независимая аналитика о цифровых деньгах, платёжной инфраструктуре и трансформации денежной системы — без хайпа, без упрощений.</p>
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Экспертная платформа о денежной инфраструктуре</div>
+    <h1 class="hero-h1" data-i18n-html="hero.h1">Деньги меняют<br><span>архитектуру.</span><br>Мы объясняем, как.</h1>
+    <p class="hero-sub" data-i18n="hero.sub">Независимая аналитика о цифровых деньгах, платёжной инфраструктуре и трансформации денежной системы — без хайпа, без упрощений.</p>
     <div class="hero-actions">
-      <a href="#materials" class="btn-primary">Читать материалы →</a>
-      <a href="https://t.me/cbdc_monitor" target="_blank" class="btn-outline">Telegram-канал ↗</a>
-      <a href="#order" class="btn-ghost">Заказать аналитику</a>
+      <a href="#materials" class="btn-primary" data-i18n="hero.cta1">Читать материалы →</a>
+      <a href="https://t.me/cbdc_monitor" target="_blank" class="btn-outline" data-i18n="hero.cta2">Telegram-канал ↗</a>
+      <a href="#order" class="btn-ghost" data-i18n="hero.cta3">Заказать аналитику</a>
     </div>
   </div>
   <div class="hero-scroll">
     <div class="hero-scroll-line"></div>
-    <span>прокрутить</span>
+    <span data-i18n="hero.scroll">прокрутить</span>
   </div>
 </section>
 
@@ -348,22 +351,22 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
   <div class="container">
     <div class="about-grid">
       <div>
-        <div class="section-label">Что такое</div>
-        <h2 class="section-title">Архитектура денег</h2>
+        <div class="section-label" data-i18n="about.label">Что такое</div>
+        <h2 class="section-title" data-i18n="about.title">Архитектура денег</h2>
         <div class="gold-rule"></div>
         <div class="about-text">
-          <p>Деньги — это не просто экономическая категория. Это <strong>инфраструктура</strong>: правила доступа, расчётная финальность, платёжные рельсы, правовой контур, баланс публичных и частных интересов.</p>
-          <p>Когда центральный банк выпускает цифровой рубль — меняется не только форма денег. Меняется то, кто контролирует денежные рельсы, кто видит транзакции, как работает расчётная финальность и на чьих серверах живёт ваш кошелёк.</p>
-          <p>«Архитектура денег» — это место, где эти процессы изучаются системно: без инфобизнес-упрощений, без крипто-хайпа, без PR центральных банков и без банковского лоббизма.</p>
+          <p data-i18n-html="about.p1">Деньги — это не просто экономическая категория. Это <strong>инфраструктура</strong>: правила доступа, расчётная финальность, платёжные рельсы, правовой контур, баланс публичных и частных интересов.</p>
+          <p data-i18n="about.p2">Когда центральный банк выпускает цифровой рубль — меняется не только форма денег. Меняется то, кто контролирует денежные рельсы, кто видит транзакции, как работает расчётная финальность и на чьих серверах живёт ваш кошелёк.</p>
+          <p data-i18n="about.p3">«Архитектура денег» — это место, где эти процессы изучаются системно: без инфобизнес-упрощений, без крипто-хайпа, без PR центральных банков и без банковского лоббизма.</p>
         </div>
         <div class="about-meta">
           <div>
             <div class="about-stat-n">12</div>
-            <div class="about-stat-l">тематических рубрик</div>
+            <div class="about-stat-l" data-i18n="about.stat1">тематических рубрик</div>
           </div>
           <div>
             <div class="about-stat-n">9</div>
-            <div class="about-stat-l">направлений анализа</div>
+            <div class="about-stat-l" data-i18n="about.stat2">направлений анализа</div>
           </div>
           <div>
             <div class="about-stat-n">t.me</div>
@@ -373,20 +376,20 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
       </div>
       <div class="about-right">
         <div class="about-principle">
-          <div class="about-principle-t">Первоисточники</div>
-          <div class="about-principle-d">Документы BIS, ЕЦБ, МВФ, Банка России, ФРС — не пересказы, а разборы оригиналов</div>
+          <div class="about-principle-t" data-i18n="p1.t">Первоисточники</div>
+          <div class="about-principle-d" data-i18n="p1.d">Документы BIS, ЕЦБ, МВФ, Банка России, ФРС — не пересказы, а разборы оригиналов</div>
         </div>
         <div class="about-principle">
-          <div class="about-principle-t">Архитектурная рамка</div>
-          <div class="about-principle-d">Не отдельные новости, а система: как ЦВЦБ, токенизация и платёжная инфраструктура складываются в новую архитектуру денег</div>
+          <div class="about-principle-t" data-i18n="p2.t">Архитектурная рамка</div>
+          <div class="about-principle-d" data-i18n="p2.d">Не отдельные новости, а система: как ЦВЦБ, токенизация и платёжная инфраструктура складываются в новую архитектуру денег</div>
         </div>
         <div class="about-principle">
-          <div class="about-principle-t">Без bias</div>
-          <div class="about-principle-d">Независимая аналитика — без корпоративного, регуляторного или идеологического перекоса</div>
+          <div class="about-principle-t" data-i18n="p3.t">Без bias</div>
+          <div class="about-principle-d" data-i18n="p3.d">Независимая аналитика — без корпоративного, регуляторного или идеологического перекоса</div>
         </div>
         <div class="about-principle">
-          <div class="about-principle-t">Понятным языком</div>
-          <div class="about-principle-d">Сложные институциональные процессы — на ясном, точном языке. Без упрощения до банальности</div>
+          <div class="about-principle-t" data-i18n="p4.t">Понятным языком</div>
+          <div class="about-principle-d" data-i18n="p4.d">Сложные институциональные процессы — на ясном, точном языке. Без упрощения до банальности</div>
         </div>
       </div>
     </div>
@@ -398,63 +401,63 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
   <div class="container">
     <div class="topics-head">
       <div>
-        <div class="section-label">Направления анализа</div>
-        <h2 class="section-title">Что мы исследуем</h2>
+        <div class="section-label" data-i18n="topics.label">Направления анализа</div>
+        <h2 class="section-title" data-i18n="topics.title">Что мы исследуем</h2>
       </div>
     </div>
     <div class="topics-grid">
       <div class="topic-card">
         <div class="topic-n">01</div>
-        <div class="topic-t">Цифровой рубль</div>
-        <div class="topic-d">Дизайн, лимиты, внедрение, инфраструктура и последствия для банков и граждан</div>
+        <div class="topic-t" data-i18n="t1.t">Цифровой рубль</div>
+        <div class="topic-d" data-i18n="t1.d">Дизайн, лимиты, внедрение, инфраструктура и последствия для банков и граждан</div>
         <div class="topic-arr">→</div>
       </div>
       <div class="topic-card">
         <div class="topic-n">02</div>
-        <div class="topic-t">ЦВЦБ / CBDC</div>
-        <div class="topic-d">Розничные и оптовые, мировой опыт, кейсы провалов и успехов, архитектурные решения</div>
+        <div class="topic-t" data-i18n="t2.t">ЦВЦБ / CBDC</div>
+        <div class="topic-d" data-i18n="t2.d">Розничные и оптовые, мировой опыт, кейсы провалов и успехов, архитектурные решения</div>
         <div class="topic-arr">→</div>
       </div>
       <div class="topic-card">
         <div class="topic-n">03</div>
-        <div class="topic-t">Токенизация</div>
-        <div class="topic-d">RWA, DLT, токенизированные депозиты, платформы — что реально работает</div>
+        <div class="topic-t" data-i18n="t3.t">Токенизация</div>
+        <div class="topic-d" data-i18n="t3.d">RWA, DLT, токенизированные депозиты, платформы — что реально работает</div>
         <div class="topic-arr">→</div>
       </div>
       <div class="topic-card">
         <div class="topic-n">04</div>
-        <div class="topic-t">Стейблкоины</div>
-        <div class="topic-d">Природа, регулирование, риски, роль в платёжной экосистеме</div>
+        <div class="topic-t" data-i18n="t4.t">Стейблкоины</div>
+        <div class="topic-d" data-i18n="t4.d">Природа, регулирование, риски, роль в платёжной экосистеме</div>
         <div class="topic-arr">→</div>
       </div>
       <div class="topic-card">
         <div class="topic-n">05</div>
-        <div class="topic-t">Платёжная инфраструктура</div>
-        <div class="topic-d">СБП, SWIFT, PIX, карточные схемы, BigTech в платежах. Кто контролирует рельсы</div>
+        <div class="topic-t" data-i18n="t5.t">Платёжная инфраструктура</div>
+        <div class="topic-d" data-i18n="t5.d">СБП, SWIFT, PIX, карточные схемы, BigTech в платежах. Кто контролирует рельсы</div>
         <div class="topic-arr">→</div>
       </div>
       <div class="topic-card">
         <div class="topic-n">06</div>
-        <div class="topic-t">Регулирование</div>
-        <div class="topic-d">Правовые рамки, AML/KYC, финальность расчётов, лицензирование. Как право определяет архитектуру</div>
+        <div class="topic-t" data-i18n="t6.t">Регулирование</div>
+        <div class="topic-d" data-i18n="t6.d">Правовые рамки, AML/KYC, финальность расчётов, лицензирование. Как право определяет архитектуру</div>
         <div class="topic-arr">→</div>
       </div>
       <div class="topic-card">
         <div class="topic-n">07</div>
-        <div class="topic-t">Трансграничные расчёты</div>
-        <div class="topic-d">Дедолларизация, mBridge, BRICS Pay, корреспондентские сети. Как меняется глобальная система</div>
+        <div class="topic-t" data-i18n="t7.t">Трансграничные расчёты</div>
+        <div class="topic-d" data-i18n="t7.d">Дедолларизация, mBridge, BRICS Pay, корреспондентские сети. Как меняется глобальная система</div>
         <div class="topic-arr">→</div>
       </div>
       <div class="topic-card">
         <div class="topic-n">08</div>
-        <div class="topic-t">DvP / PvP</div>
-        <div class="topic-d">Расчётные механизмы: поставка против платежа, платёж против платежа во взаимодействии с финансовыми рынками</div>
+        <div class="topic-t" data-i18n="t8.t">DvP / PvP</div>
+        <div class="topic-d" data-i18n="t8.d">Расчётные механизмы: поставка против платежа, платёж против платежа во взаимодействии с финансовыми рынками</div>
         <div class="topic-arr">→</div>
       </div>
       <div class="topic-card">
         <div class="topic-n">09</div>
-        <div class="topic-t">Будущее денег</div>
-        <div class="topic-d">Денежная теория, роль центральных банков, новая архитектура денежной системы</div>
+        <div class="topic-t" data-i18n="t9.t">Будущее денег</div>
+        <div class="topic-d" data-i18n="t9.d">Денежная теория, роль центральных банков, новая архитектура денежной системы</div>
         <div class="topic-arr">→</div>
       </div>
     </div>
@@ -466,71 +469,71 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
   <div class="container">
     <div class="rubrics-head">
       <div>
-        <div class="section-label" style="color:rgba(201,168,76,.6)">Структура контента</div>
-        <h2 class="section-title section-title-light" style="margin-top:8px">Рубрики</h2>
+        <div class="section-label" style="color:rgba(201,168,76,.6)" data-i18n="rubs.label">Структура контента</div>
+        <h2 class="section-title section-title-light" style="margin-top:8px" data-i18n="rubs.title">Рубрики</h2>
       </div>
-      <a href="#materials" class="rubrics-link">Все материалы →</a>
+      <a href="#materials" class="rubrics-link" data-i18n="rubs.link">Все материалы →</a>
     </div>
     <div class="rubrics-grid">
       <div class="rubric-card">
-        <div class="rubric-tag rc-ab">Азбука</div>
-        <div class="rubric-t">Азбука</div>
-        <div class="rubric-d">Простые и точные объяснения ключевых понятий денежной инфраструктуры</div>
+        <div class="rubric-tag rc-ab" data-i18n="r.ab">Азбука</div>
+        <div class="rubric-t" data-i18n="r.ab">Азбука</div>
+        <div class="rubric-d" data-i18n="r.ab.d">Простые и точные объяснения ключевых понятий денежной инфраструктуры</div>
       </div>
       <div class="rubric-card">
-        <div class="rubric-tag rc-pu">Пульс</div>
-        <div class="rubric-t">Пульс</div>
-        <div class="rubric-d">Короткие важные события — что произошло и что это реально означает</div>
+        <div class="rubric-tag rc-pu" data-i18n="r.pu">Пульс</div>
+        <div class="rubric-t" data-i18n="r.pu">Пульс</div>
+        <div class="rubric-d" data-i18n="r.pu.d">Короткие важные события — что произошло и что это реально означает</div>
       </div>
       <div class="rubric-card">
-        <div class="rubric-tag rc-ra">Радар</div>
-        <div class="rubric-t">Радар</div>
-        <div class="rubric-d">Еженедельная карта смыслов: что важно, что шум, что упустили</div>
+        <div class="rubric-tag rc-ra" data-i18n="r.ra">Радар</div>
+        <div class="rubric-t" data-i18n="r.ra">Радар</div>
+        <div class="rubric-d" data-i18n="r.ra.d">Еженедельная карта смыслов: что важно, что шум, что упустили</div>
       </div>
       <div class="rubric-card">
-        <div class="rubric-tag rc-go">Горизонт</div>
-        <div class="rubric-t">Горизонт</div>
-        <div class="rubric-d">Месячные и квартальные структурные тренды — что меняется в архитектуре</div>
+        <div class="rubric-tag rc-go" data-i18n="r.go">Горизонт</div>
+        <div class="rubric-t" data-i18n="r.go">Горизонт</div>
+        <div class="rubric-d" data-i18n="r.go.d">Месячные и квартальные структурные тренды — что меняется в архитектуре</div>
       </div>
       <div class="rubric-card">
-        <div class="rubric-tag rc-ko">Контур</div>
-        <div class="rubric-t">Контур</div>
-        <div class="rubric-d">Технологические и инфраструктурные разборы — как работает изнутри</div>
+        <div class="rubric-tag rc-ko" data-i18n="r.ko">Контур</div>
+        <div class="rubric-t" data-i18n="r.ko">Контур</div>
+        <div class="rubric-d" data-i18n="r.ko.d">Технологические и инфраструктурные разборы — как работает изнутри</div>
       </div>
       <div class="rubric-card">
-        <div class="rubric-tag rc-rb">Разбор</div>
-        <div class="rubric-t">Разбор</div>
-        <div class="rubric-d">Аналитический разбор конкретного документа, доклада или рабочей бумаги</div>
+        <div class="rubric-tag rc-rb" data-i18n="r.rb">Разбор</div>
+        <div class="rubric-t" data-i18n="r.rb">Разбор</div>
+        <div class="rubric-d" data-i18n="r.rb.d">Аналитический разбор конкретного документа, доклада или рабочей бумаги</div>
       </div>
       <div class="rubric-card">
-        <div class="rubric-tag rc-pr">Право</div>
-        <div class="rubric-t">Право</div>
-        <div class="rubric-d">Регулирование, правовые рамки, AML/KYC, финальность расчётов, лицензирование</div>
+        <div class="rubric-tag rc-pr" data-i18n="r.pr">Право</div>
+        <div class="rubric-t" data-i18n="r.pr">Право</div>
+        <div class="rubric-d" data-i18n="r.pr.d">Регулирование, правовые рамки, AML/KYC, финальность расчётов, лицензирование</div>
       </div>
       <div class="rubric-card">
-        <div class="rubric-tag rc-fo">Фокус</div>
-        <div class="rubric-t">Фокус</div>
-        <div class="rubric-d">Одна страна, проект или организация — детальный разбор в центре внимания</div>
+        <div class="rubric-tag rc-fo" data-i18n="r.fo">Фокус</div>
+        <div class="rubric-t" data-i18n="r.fo">Фокус</div>
+        <div class="rubric-d" data-i18n="r.fo.d">Одна страна, проект или организация — детальный разбор в центре внимания</div>
       </div>
       <div class="rubric-card">
-        <div class="rubric-tag rc-mi">Мифы</div>
-        <div class="rubric-t">Мифы</div>
-        <div class="rubric-d">Разбор распространённых заблуждений: без полемики, с фактами</div>
+        <div class="rubric-tag rc-mi" data-i18n="r.mi">Мифы</div>
+        <div class="rubric-t" data-i18n="r.mi">Мифы</div>
+        <div class="rubric-d" data-i18n="r.mi.d">Разбор распространённых заблуждений: без полемики, с фактами</div>
       </div>
       <div class="rubric-card">
-        <div class="rubric-tag rc-sc">Сценарии</div>
-        <div class="rubric-t">Сценарии</div>
-        <div class="rubric-d">Практические кейсы и возможные модели применения в реальных условиях</div>
+        <div class="rubric-tag rc-sc" data-i18n="r.sc">Сценарии</div>
+        <div class="rubric-t" data-i18n="r.sc">Сценарии</div>
+        <div class="rubric-d" data-i18n="r.sc.d">Практические кейсы и возможные модели применения в реальных условиях</div>
       </div>
       <div class="rubric-card">
-        <div class="rubric-tag rc-by">Быт</div>
-        <div class="rubric-t">Быт</div>
-        <div class="rubric-d">Объяснение через повседневные ситуации — без терминов, с конкретными примерами</div>
+        <div class="rubric-tag rc-by" data-i18n="r.by">Быт</div>
+        <div class="rubric-t" data-i18n="r.by">Быт</div>
+        <div class="rubric-d" data-i18n="r.by.d">Объяснение через повседневные ситуации — без терминов, с конкретными примерами</div>
       </div>
       <div class="rubric-card">
-        <div class="rubric-tag rc-gl">Голоса</div>
-        <div class="rubric-t">Голоса</div>
-        <div class="rubric-d">Важные сигналы от центробанков, BIS, МВФ — что и зачем они говорят</div>
+        <div class="rubric-tag rc-gl" data-i18n="r.gl">Голоса</div>
+        <div class="rubric-t" data-i18n="r.gl">Голоса</div>
+        <div class="rubric-d" data-i18n="r.gl.d">Важные сигналы от центробанков, BIS, МВФ — что и зачем они говорят</div>
       </div>
     </div>
   </div>
@@ -541,16 +544,16 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
   <div class="container">
     <div class="materials-head">
       <div>
-        <div class="section-label">Последние публикации</div>
-        <h2 class="section-title">Материалы</h2>
+        <div class="section-label" data-i18n="mat.label">Последние публикации</div>
+        <h2 class="section-title" data-i18n="mat.title">Материалы</h2>
       </div>
-      <a href="#" class="all-link">Все материалы →</a>
+      <a href="#" class="all-link" data-i18n="mat.all">Все материалы →</a>
     </div>
     <div class="materials-grid" id="mat-grid">
       <!-- заполняется из массива ARTICLES в конце файла -->
     </div>
     <div style="margin-top:32px;text-align:center">
-      <a href="#" class="all-link">Смотреть все материалы →</a>
+      <a href="#" class="all-link" data-i18n="mat.all2">Смотреть все материалы →</a>
     </div>
   </div>
 </section>
@@ -558,40 +561,40 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
 <!-- ══ RESEARCH ══ -->
 <section class="research" id="research">
   <div class="container">
-    <div class="section-label">Глубокий анализ</div>
-    <h2 class="section-title" style="margin-top:8px">Исследования</h2>
+    <div class="section-label" data-i18n="res.label">Глубокий анализ</div>
+    <h2 class="section-title" style="margin-top:8px" data-i18n="res.title">Исследования</h2>
     <div class="research-grid">
       <div class="research-card">
         <div class="research-card-banner"></div>
         <div class="research-card-body">
-          <div class="research-tag">Исследование · Апрель 2026</div>
-          <div class="research-t">Публичный дискурс о розничных платежах и кейс ЦВЦБ</div>
-          <div class="research-d">Разбор статьи Биндзайля (2026): почему обсуждение платёжной архитектуры структурно предвзято и что это означает для оценки аргументов за и против ЦВЦБ.</div>
+          <div class="research-tag" data-i18n="res1.tag">Исследование · Апрель 2026</div>
+          <div class="research-t" data-i18n="res1.t">Публичный дискурс о розничных платежах и кейс ЦВЦБ</div>
+          <div class="research-d" data-i18n="res1.d">Разбор статьи Биндзайля (2026): почему обсуждение платёжной архитектуры структурно предвзято и что это означает для оценки аргументов за и против ЦВЦБ.</div>
           <div class="research-findings">
-            <div class="research-findings-label">Ключевые выводы</div>
-            <div class="research-finding">Экспертиза в платёжной отрасли концентрируется у заинтересованных сторон — нейтральных голосов структурно мало</div>
-            <div class="research-finding">Аргумент «рынок уже справляется» содержит скрытую предпосылку о том, что частная олигополия — оптимальный результат</div>
-            <div class="research-finding">PIX решает ~50% задач ЦВЦБ, но не обеспечивает якорную функцию ЦБ на розничном уровне</div>
+            <div class="research-findings-label" data-i18n="res.fl">Ключевые выводы</div>
+            <div class="research-finding" data-i18n="res.f1">Экспертиза в платёжной отрасли концентрируется у заинтересованных сторон — нейтральных голосов структурно мало</div>
+            <div class="research-finding" data-i18n="res.f2">Аргумент «рынок уже справляется» содержит скрытую предпосылку о том, что частная олигополия — оптимальный результат</div>
+            <div class="research-finding" data-i18n="res.f3">PIX решает ~50% задач ЦВЦБ, но не обеспечивает якорную функцию ЦБ на розничном уровне</div>
           </div>
-          <a href="index.html" class="research-cta" target="_blank">Читать полный разбор →</a>
+          <a href="index.html" class="research-cta" target="_blank" data-i18n="res.cta1">Читать полный разбор →</a>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:16px">
         <div class="research-card" style="flex:1">
           <div class="research-card-banner" style="background:linear-gradient(90deg,#4A6494,#0D1B3E)"></div>
           <div class="research-card-body">
-            <div class="research-tag">Исследование · В разработке</div>
-            <div class="research-t">Цифровой рубль: архитектура и последствия для банков</div>
-            <div class="research-d">Системный анализ дизайна цифрового рубля: двухуровневая модель, холдинговые лимиты, роль банков как агентов.</div>
-            <div class="research-cta" style="opacity:.5;cursor:default">Готовится к публикации</div>
+            <div class="research-tag" data-i18n="res2.tag">Исследование · В разработке</div>
+            <div class="research-t" data-i18n="res2.t">Цифровой рубль: архитектура и последствия для банков</div>
+            <div class="research-d" data-i18n="res2.d">Системный анализ дизайна цифрового рубля: двухуровневая модель, холдинговые лимиты, роль банков как агентов.</div>
+            <div class="research-cta" style="opacity:.5;cursor:default" data-i18n="res.wip">Готовится к публикации</div>
           </div>
         </div>
         <div class="research-aside">
           <div>
-            <div class="research-aside-t">Нужна аналитика под вашу задачу?</div>
-            <div class="research-aside-d">Подготовим исследование, справку или брифинг — адаптированные под вашу отрасль, аудиторию и конкретный вопрос.</div>
+            <div class="research-aside-t" data-i18n="aside.t">Нужна аналитика под вашу задачу?</div>
+            <div class="research-aside-d" data-i18n="aside.d">Подготовим исследование, справку или брифинг — адаптированные под вашу отрасль, аудиторию и конкретный вопрос.</div>
           </div>
-          <a href="#order" class="research-aside-btn">Заказать исследование →</a>
+          <a href="#order" class="research-aside-btn" data-i18n="aside.btn">Заказать исследование →</a>
         </div>
       </div>
     </div>
@@ -601,15 +604,15 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
 <!-- ══ AUTHORS ══ -->
 <section class="authors" id="authors">
   <div class="container">
-    <div class="section-label">Авторы</div>
-    <h2 class="section-title" style="margin-top:8px">Кто создаёт проект</h2>
+    <div class="section-label" data-i18n="auth.label">Авторы</div>
+    <h2 class="section-title" style="margin-top:8px" data-i18n="auth.title">Кто создаёт проект</h2>
     <div class="authors-grid">
       <div class="author-card">
         <div class="author-avatar">ВМ</div>
         <div class="author-info">
           <div class="author-name">Вера Макарова</div>
-          <div class="author-role">Со-основатель, главный редактор</div>
-          <div class="author-bio">Специализация — денежная теория, цифровые валюты центральных банков, платёжная инфраструктура. Работает с первоисточниками: документами BIS, ЕЦБ, Банка России. Ведёт Telegram-канал @cbdc_monitor.</div>
+          <div class="author-role" data-i18n="a1.role">Со-основатель, главный редактор</div>
+          <div class="author-bio" data-i18n="a1.bio">Специализация — денежная теория, цифровые валюты центральных банков, платёжная инфраструктура. Работает с первоисточниками: документами BIS, ЕЦБ, Банка России. Ведёт Telegram-канал @cbdc_monitor.</div>
           <div class="author-links">
             <a href="#" class="author-link">↗ Telegram</a>
           </div>
@@ -619,8 +622,8 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
         <div class="author-avatar">ЕО</div>
         <div class="author-info">
           <div class="author-name">Елизавета Оглоблина</div>
-          <div class="author-role">Со-основатель, стратегия</div>
-          <div class="author-bio">Специализация — регулирование цифровых финансов, токенизация, трансграничные расчёты. Работает с корпоративными клиентами и образовательными проектами в области цифровой экономики.</div>
+          <div class="author-role" data-i18n="a2.role">Со-основатель, стратегия</div>
+          <div class="author-bio" data-i18n="a2.bio">Специализация — регулирование цифровых финансов, токенизация, трансграничные расчёты. Работает с корпоративными клиентами и образовательными проектами в области цифровой экономики.</div>
           <div class="author-links">
             <a href="https://t.me/Elizaveta_Ogloblina" target="_blank" class="author-link">↗ @Elizaveta_Ogloblina</a>
           </div>
@@ -634,52 +637,52 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
 <section class="forwhom">
   <div class="container">
     <div class="forwhom-head">
-      <div class="section-label" style="color:rgba(201,168,76,.6)">Аудитория</div>
-      <h2 class="section-title section-title-light" style="margin-top:8px">Для кого</h2>
-      <p style="color:var(--blue-lt);margin-top:16px;max-width:600px;font-size:15px;line-height:1.7">«Архитектура денег» создана для людей, которым нужна не сводка новостей, а понимание процессов.</p>
+      <div class="section-label" style="color:rgba(201,168,76,.6)" data-i18n="fw.label">Аудитория</div>
+      <h2 class="section-title section-title-light" style="margin-top:8px" data-i18n="fw.title">Для кого</h2>
+      <p style="color:var(--blue-lt);margin-top:16px;max-width:600px;font-size:15px;line-height:1.7" data-i18n="fw.intro">«Архитектура денег» создана для людей, которым нужна не сводка новостей, а понимание процессов.</p>
     </div>
     <div class="forwhom-grid">
       <div class="forwhom-card">
         <div class="forwhom-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="1" stroke="#C9A84C" stroke-width="1.5"/><line x1="2" y1="8" x2="18" y2="8" stroke="#C9A84C" stroke-width="1.5"/></svg>
         </div>
-        <div class="forwhom-t">Банки и финорганизации</div>
-        <div class="forwhom-d">Готовятся к внедрению цифрового рубля и хотят понять реальные последствия для бизнес-модели</div>
+        <div class="forwhom-t" data-i18n="fw1.t">Банки и финорганизации</div>
+        <div class="forwhom-d" data-i18n="fw1.d">Готовятся к внедрению цифрового рубля и хотят понять реальные последствия для бизнес-модели</div>
       </div>
       <div class="forwhom-card">
         <div class="forwhom-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#C9A84C" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
-        <div class="forwhom-t">Финтех и платёжные компании</div>
-        <div class="forwhom-d">Ищут не заголовки, а архитектурное понимание изменений в инфраструктуре расчётов</div>
+        <div class="forwhom-t" data-i18n="fw2.t">Финтех и платёжные компании</div>
+        <div class="forwhom-d" data-i18n="fw2.d">Ищут не заголовки, а архитектурное понимание изменений в инфраструктуре расчётов</div>
       </div>
       <div class="forwhom-card">
         <div class="forwhom-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4h12v12H4z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/><line x1="7" y1="8" x2="13" y2="8" stroke="#C9A84C" stroke-width="1.5"/><line x1="7" y1="11" x2="11" y2="11" stroke="#C9A84C" stroke-width="1.5"/></svg>
         </div>
-        <div class="forwhom-t">Регуляторы и юристы</div>
-        <div class="forwhom-d">Нужен системный разбор нормативных изменений, сравнительные кейсы, анализ первоисточников</div>
+        <div class="forwhom-t" data-i18n="fw3.t">Регуляторы и юристы</div>
+        <div class="forwhom-d" data-i18n="fw3.d">Нужен системный разбор нормативных изменений, сравнительные кейсы, анализ первоисточников</div>
       </div>
       <div class="forwhom-card">
         <div class="forwhom-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3L3 7v6l7 4 7-4V7l-7-4z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/></svg>
         </div>
-        <div class="forwhom-t">Исследователи и аналитики</div>
-        <div class="forwhom-d">Структурированная база материалов с источниками и аналитической рамкой</div>
+        <div class="forwhom-t" data-i18n="fw4.t">Исследователи и аналитики</div>
+        <div class="forwhom-d" data-i18n="fw4.d">Структурированная база материалов с источниками и аналитической рамкой</div>
       </div>
       <div class="forwhom-card">
         <div class="forwhom-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 17V6l5-3 5 3v11" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/><rect x="8" y="12" width="4" height="5" stroke="#C9A84C" stroke-width="1.5"/></svg>
         </div>
-        <div class="forwhom-t">Преподаватели и студенты</div>
-        <div class="forwhom-d">Структурированные объяснения, первоисточники, логика процессов — для учёбы и преподавания</div>
+        <div class="forwhom-t" data-i18n="fw5.t">Преподаватели и студенты</div>
+        <div class="forwhom-d" data-i18n="fw5.d">Структурированные объяснения, первоисточники, логика процессов — для учёбы и преподавания</div>
       </div>
       <div class="forwhom-card">
         <div class="forwhom-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="#C9A84C" stroke-width="1.5"/><path d="M4 17c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
-        <div class="forwhom-t">Умный читатель</div>
-        <div class="forwhom-d">Хочет понять, что происходит с деньгами, без крипто-хайпа и без поверхностных упрощений</div>
+        <div class="forwhom-t" data-i18n="fw6.t">Умный читатель</div>
+        <div class="forwhom-d" data-i18n="fw6.d">Хочет понять, что происходит с деньгами, без крипто-хайпа и без поверхностных упрощений</div>
       </div>
     </div>
   </div>
@@ -690,54 +693,54 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
   <div class="container">
     <div style="display:flex;justify-content:space-between;align-items:flex-end">
       <div>
-        <div class="section-label">Форматы работы</div>
-        <h2 class="section-title" style="margin-top:8px">Услуги</h2>
+        <div class="section-label" data-i18n="svc.label">Форматы работы</div>
+        <h2 class="section-title" style="margin-top:8px" data-i18n="svc.title">Услуги</h2>
       </div>
-      <a href="#order" class="all-link">Заказать →</a>
+      <a href="#order" class="all-link" data-i18n="svc.order">Заказать →</a>
     </div>
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-n">01 · Аналитика</div>
-        <div class="service-t">Аналитическое исследование</div>
-        <div class="service-d">Структурированный анализ конкретного вопроса — не общедоступный материал, а ответ на вашу задачу. Отчёт 10-40 страниц с выводами, схемами, источниками и executive summary.</div>
+        <div class="service-n" data-i18n="s1.n">01 · Аналитика</div>
+        <div class="service-t" data-i18n="s1.t">Аналитическое исследование</div>
+        <div class="service-d" data-i18n="s1.d">Структурированный анализ конкретного вопроса — не общедоступный материал, а ответ на вашу задачу. Отчёт 10-40 страниц с выводами, схемами, источниками и executive summary.</div>
         <div class="service-tags">
-          <span class="service-tag">Банки</span>
-          <span class="service-tag">Финтех</span>
-          <span class="service-tag">Юрфирмы</span>
-          <span class="service-tag">Корпорации</span>
+          <span class="service-tag" data-i18n="tag.banks">Банки</span>
+          <span class="service-tag" data-i18n="tag.fintech">Финтех</span>
+          <span class="service-tag" data-i18n="tag.lawfirms">Юрфирмы</span>
+          <span class="service-tag" data-i18n="tag.corps">Корпорации</span>
         </div>
         <div class="service-arrow">→</div>
       </div>
       <div class="service-card">
-        <div class="service-n">02 · Обучение</div>
-        <div class="service-t">Корпоративные программы</div>
-        <div class="service-d">Системное понимание темы для вашей команды — от однодневного воркшопа до курса из модулей. Форматы: очно, онлайн, гибрид. Адаптация под уровень аудитории.</div>
+        <div class="service-n" data-i18n="s2.n">02 · Обучение</div>
+        <div class="service-t" data-i18n="s2.t">Корпоративные программы</div>
+        <div class="service-d" data-i18n="s2.d">Системное понимание темы для вашей команды — от однодневного воркшопа до курса из модулей. Форматы: очно, онлайн, гибрид. Адаптация под уровень аудитории.</div>
         <div class="service-tags">
-          <span class="service-tag">Банки</span>
-          <span class="service-tag">Регуляторы</span>
-          <span class="service-tag">Казначейства</span>
+          <span class="service-tag" data-i18n="tag.banks">Банки</span>
+          <span class="service-tag" data-i18n="tag.regs">Регуляторы</span>
+          <span class="service-tag" data-i18n="tag.treasuries">Казначейства</span>
         </div>
         <div class="service-arrow">→</div>
       </div>
       <div class="service-card">
-        <div class="service-n">03 · Выступления</div>
-        <div class="service-t">Лекции и семинары</div>
-        <div class="service-d">Экспертное выступление для вашей аудитории: конференция, университет, корпоративное мероприятие. 45-90 минут с Q&A или панельная дискуссия.</div>
+        <div class="service-n" data-i18n="s3.n">03 · Выступления</div>
+        <div class="service-t" data-i18n="s3.t">Лекции и семинары</div>
+        <div class="service-d" data-i18n="s3.d">Экспертное выступление для вашей аудитории: конференция, университет, корпоративное мероприятие. 45-90 минут с Q&A или панельная дискуссия.</div>
         <div class="service-tags">
-          <span class="service-tag">Университеты</span>
-          <span class="service-tag">Конференции</span>
-          <span class="service-tag">Форумы</span>
+          <span class="service-tag" data-i18n="tag.unis">Университеты</span>
+          <span class="service-tag" data-i18n="tag.confs">Конференции</span>
+          <span class="service-tag" data-i18n="tag.forums">Форумы</span>
         </div>
         <div class="service-arrow">→</div>
       </div>
       <div class="service-card">
-        <div class="service-n">04 · Консультации</div>
-        <div class="service-t">Справки и консультации</div>
-        <div class="service-d">Быстрый структурированный ответ на конкретный вопрос: аналитическая справка 2-5 страниц за 3-5 дней или консультационная сессия 60-90 минут.</div>
+        <div class="service-n" data-i18n="s4.n">04 · Консультации</div>
+        <div class="service-t" data-i18n="s4.t">Справки и консультации</div>
+        <div class="service-d" data-i18n="s4.d">Быстрый структурированный ответ на конкретный вопрос: аналитическая справка 2-5 страниц за 3-5 дней или консультационная сессия 60-90 минут.</div>
         <div class="service-tags">
-          <span class="service-tag">Медиа</span>
-          <span class="service-tag">Советы директоров</span>
-          <span class="service-tag">Стартапы</span>
+          <span class="service-tag" data-i18n="tag.media">Медиа</span>
+          <span class="service-tag" data-i18n="tag.boards">Советы директоров</span>
+          <span class="service-tag" data-i18n="tag.startups">Стартапы</span>
         </div>
         <div class="service-arrow">→</div>
       </div>
@@ -750,10 +753,10 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
   <div class="container">
     <div class="telegram-inner">
       <div class="telegram-left">
-        <div class="section-label">Оперативно</div>
-        <h2 class="section-title section-title-light">Мы в Telegram<span id="tg-feed-badge"></span></h2>
-        <p>@cbdc_monitor — ежедневный мониторинг и разборы: цифровой рубль, ЦВЦБ, токенизация, платёжная инфраструктура. Короткие форматы — сигналы, которые нельзя пропустить.</p>
-        <a href="https://t.me/cbdc_monitor" target="_blank" class="btn-primary">Перейти в канал ↗</a>
+        <div class="section-label" data-i18n="tg.label">Оперативно</div>
+        <h2 class="section-title section-title-light" data-i18n-html="tg.title">Мы в Telegram<span id="tg-feed-badge"></span></h2>
+        <p data-i18n="tg.desc">@cbdc_monitor — ежедневный мониторинг и разборы: цифровой рубль, ЦВЦБ, токенизация, платёжная инфраструктура. Короткие форматы — сигналы, которые нельзя пропустить.</p>
+        <a href="https://t.me/cbdc_monitor" target="_blank" class="btn-primary" data-i18n="tg.btn">Перейти в канал ↗</a>
         <div class="telegram-url">t.me/cbdc_monitor</div>
       </div>
       <div class="tg-posts" id="tg-posts-list">
@@ -768,61 +771,61 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
   <div class="container">
     <div class="order-inner">
       <div class="order-left">
-        <div class="section-label" style="color:rgba(201,168,76,.6)">Работа с проектом</div>
-        <h2 class="section-title section-title-light">Нужна аналитика<br>под вашу задачу?</h2>
-        <p>Подготовим исследование, аналитическую справку или обучающую программу — адаптированные под вашу отрасль, аудиторию и конкретный вопрос. Ответим в течение суток.</p>
-        <a href="https://t.me/Elizaveta_Ogloblina" target="_blank" class="btn-primary">Написать в Telegram →</a>
+        <div class="section-label" style="color:rgba(201,168,76,.6)" data-i18n="ord.label">Работа с проектом</div>
+        <h2 class="section-title section-title-light" data-i18n-html="ord.title">Нужна аналитика<br>под вашу задачу?</h2>
+        <p data-i18n="ord.desc">Подготовим исследование, аналитическую справку или обучающую программу — адаптированные под вашу отрасль, аудиторию и конкретный вопрос. Ответим в течение суток.</p>
+        <a href="https://t.me/Elizaveta_Ogloblina" target="_blank" class="btn-primary" data-i18n="ord.btn">Написать в Telegram →</a>
         <div style="margin-top:32px;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)">
-          <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px">Что мы делаем</div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px" data-i18n="ord.what">Что мы делаем</div>
           <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span>Аналитические исследования 10-40 страниц</div>
-            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span>Корпоративное обучение и лекции</div>
-            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span>Аналитические справки за 3-5 дней</div>
-            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span>Консультации и экспертные комментарии</div>
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span><span data-i18n="ord.li1">Аналитические исследования 10-40 страниц</span></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span><span data-i18n="ord.li2">Корпоративное обучение и лекции</span></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span><span data-i18n="ord.li3">Аналитические справки за 3-5 дней</span></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span><span data-i18n="ord.li4">Консультации и экспертные комментарии</span></div>
           </div>
         </div>
       </div>
       <div class="order-right">
-        <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:20px">Форма запроса</div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:20px" data-i18n="ord.form">Форма запроса</div>
         <form class="order-form" onsubmit="handleSubmit(event)">
           <div class="order-form-row">
             <div class="order-form-group">
-              <div class="order-form-label">Ваше имя</div>
-              <input type="text" placeholder="Имя" required>
+              <div class="order-form-label" data-i18n="f.name.l">Ваше имя</div>
+              <input type="text" placeholder="Имя" data-i18n-ph="f.name.ph" required>
             </div>
             <div class="order-form-group">
-              <div class="order-form-label">Организация</div>
-              <input type="text" placeholder="Компания / вуз">
+              <div class="order-form-label" data-i18n="f.org.l">Организация</div>
+              <input type="text" placeholder="Компания / вуз" data-i18n-ph="f.org.ph">
             </div>
           </div>
           <div class="order-form-group">
-            <div class="order-form-label">Email или Telegram</div>
-            <input type="text" placeholder="email@example.com или @username" required>
+            <div class="order-form-label" data-i18n="f.con.l">Email или Telegram</div>
+            <input type="text" placeholder="email@example.com или @username" data-i18n-ph="f.con.ph" required>
           </div>
           <div class="order-form-group">
-            <div class="order-form-label">Тип запроса</div>
+            <div class="order-form-label" data-i18n="f.type.l">Тип запроса</div>
             <select required>
-              <option value="" disabled selected>Выберите...</option>
-              <option>Лекция / выступление</option>
-              <option>Аналитическое исследование</option>
-              <option>Аналитическая справка</option>
-              <option>Корпоративное обучение</option>
-              <option>Комментарий для медиа</option>
-              <option>Партнёрство</option>
-              <option>Другое</option>
+              <option value="" disabled selected data-i18n="f.type.0">Выберите...</option>
+              <option data-i18n="f.type.1">Лекция / выступление</option>
+              <option data-i18n="f.type.2">Аналитическое исследование</option>
+              <option data-i18n="f.type.3">Аналитическая справка</option>
+              <option data-i18n="f.type.4">Корпоративное обучение</option>
+              <option data-i18n="f.type.5">Комментарий для медиа</option>
+              <option data-i18n="f.type.6">Партнёрство</option>
+              <option data-i18n="f.type.7">Другое</option>
             </select>
           </div>
           <div class="order-form-group">
-            <div class="order-form-label">Опишите запрос</div>
-            <textarea placeholder="Вопрос, тема, аудитория, контекст, пожелания по срокам..."></textarea>
+            <div class="order-form-label" data-i18n="f.desc.l">Опишите запрос</div>
+            <textarea placeholder="Вопрос, тема, аудитория, контекст, пожелания по срокам..." data-i18n-ph="f.desc.ph"></textarea>
           </div>
-          <button type="submit" class="order-submit">Отправить запрос</button>
-          <div class="order-note">Ответим в течение 24 часов — по email или в Telegram</div>
+          <button type="submit" class="order-submit" data-i18n="f.submit">Отправить запрос</button>
+          <div class="order-note" data-i18n="f.note">Ответим в течение 24 часов — по email или в Telegram</div>
         </form>
         <div id="form-success" style="display:none;text-align:center;padding:40px 20px">
           <div style="font-size:32px;margin-bottom:16px">✓</div>
-          <div style="font-family:var(--serif);font-size:20px;color:var(--white);margin-bottom:10px">Заявка отправлена</div>
-          <div style="font-size:14px;color:rgba(255,255,255,.5)">Ответим в течение суток</div>
+          <div style="font-family:var(--serif);font-size:20px;color:var(--white);margin-bottom:10px" data-i18n="f.ok.t">Заявка отправлена</div>
+          <div style="font-size:14px;color:rgba(255,255,255,.5)" data-i18n="f.ok.d">Ответим в течение суток</div>
         </div>
       </div>
     </div>
@@ -842,47 +845,47 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
             <line x1="10" y1="10" x2="17" y2="17" stroke="#C9A84C" stroke-width="1.5"/>
           </svg>
         </div>
-        <div class="footer-brand-name">Архитектура денег</div>
-        <div class="footer-brand-sub">Независимая экспертная платформа о цифровых деньгах и платёжной инфраструктуре</div>
+        <div class="footer-brand-name" data-i18n="logo.name">Архитектура денег</div>
+        <div class="footer-brand-sub" data-i18n="foot.sub">Независимая экспертная платформа о цифровых деньгах и платёжной инфраструктуре</div>
         <a href="https://t.me/cbdc_monitor" target="_blank" class="footer-tg">↗ t.me/cbdc_monitor</a>
       </div>
       <div>
-        <div class="footer-col-title">Материалы</div>
+        <div class="footer-col-title" data-i18n="foot.col1">Материалы</div>
         <div class="footer-links">
-          <a href="#">Все материалы</a>
-          <a href="#">Азбука</a>
-          <a href="#">Разбор</a>
-          <a href="#">Контур</a>
-          <a href="#">Право</a>
-          <a href="#">Мифы</a>
+          <a href="#" data-i18n="foot.all">Все материалы</a>
+          <a href="#" data-i18n="r.ab">Азбука</a>
+          <a href="#" data-i18n="r.rb">Разбор</a>
+          <a href="#" data-i18n="r.ko">Контур</a>
+          <a href="#" data-i18n="r.pr">Право</a>
+          <a href="#" data-i18n="r.mi">Мифы</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title">Темы</div>
+        <div class="footer-col-title" data-i18n="foot.col2">Темы</div>
         <div class="footer-links">
-          <a href="#">Цифровой рубль</a>
-          <a href="#">ЦВЦБ / CBDC</a>
-          <a href="#">Токенизация</a>
-          <a href="#">Стейблкоины</a>
-          <a href="#">Регулирование</a>
-          <a href="#">Трансграничные</a>
+          <a href="#" data-i18n="t1.t">Цифровой рубль</a>
+          <a href="#" data-i18n="t2.t">ЦВЦБ / CBDC</a>
+          <a href="#" data-i18n="t3.t">Токенизация</a>
+          <a href="#" data-i18n="t4.t">Стейблкоины</a>
+          <a href="#" data-i18n="t6.t">Регулирование</a>
+          <a href="#" data-i18n="foot.cross">Трансграничные</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title">Проект</div>
+        <div class="footer-col-title" data-i18n="foot.col3">Проект</div>
         <div class="footer-links">
-          <a href="#about-proj">О проекте</a>
-          <a href="#authors">Авторы</a>
-          <a href="#services">Услуги</a>
-          <a href="#order">Заказать</a>
-          <a href="index.html">Разбор Биндзайля →</a>
+          <a href="#about-proj" data-i18n="nav.about">О проекте</a>
+          <a href="#authors" data-i18n="auth.label">Авторы</a>
+          <a href="#services" data-i18n="svc.title">Услуги</a>
+          <a href="#order" data-i18n="nav.order">Заказать</a>
+          <a href="index.html" data-i18n="foot.bindseil">Разбор Биндзайля →</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">
+      <div class="footer-copy" data-i18n-html="foot.copy">
         © 2024–2026 Архитектура денег · Независимый экспертный проект ·
-        <a href="#">Политика конфиденциальности</a>
+        <a href="#" data-i18n="foot.privacy">Политика конфиденциальности</a>
       </div>
       <div class="footer-copy">
         <a href="https://t.me/cbdc_monitor" target="_blank">@cbdc_monitor</a>
@@ -892,7 +895,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
 </footer>
 
 <!-- ══ PROTOTYPE BADGE ══ -->
-<div class="badge-proto">Прототип · Май 2026</div>
+<div class="badge-proto" data-i18n="badge">Прототип · Май 2026</div>
 
 <script>
 // ╔══════════════════════════════════════════════════════════════╗
@@ -904,6 +907,240 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
 // ══ НАСТРОЙКИ ══════════════════════════════════════════════════
 const TG_CHANNEL  = 'cbdc_monitor';
 const POSTS_COUNT = 10;
+// ── i18n ─────────────────────────────────────────────────────────
+const I18N = {
+  ru: {
+    'logo.name':'Архитектура денег','logo.sub':'экспертная платформа',
+    'nav.materials':'Материалы','nav.research':'Исследования','nav.rubrics':'Рубрики',
+    'nav.about':'О проекте','nav.order':'Заказать',
+    'hero.eyebrow':'Экспертная платформа о денежной инфраструктуре',
+    'hero.h1':'Деньги меняют<br><span>архитектуру.</span><br>Мы объясняем, как.',
+    'hero.sub':'Независимая аналитика о цифровых деньгах, платёжной инфраструктуре и трансформации денежной системы — без хайпа, без упрощений.',
+    'hero.cta1':'Читать материалы →','hero.cta2':'Telegram-канал ↗','hero.cta3':'Заказать аналитику','hero.scroll':'прокрутить',
+    'about.label':'Что такое','about.title':'Архитектура денег',
+    'about.p1':'Деньги — это не просто экономическая категория. Это <strong>инфраструктура</strong>: правила доступа, расчётная финальность, платёжные рельсы, правовой контур, баланс публичных и частных интересов.',
+    'about.p2':'Когда центральный банк выпускает цифровой рубль — меняется не только форма денег. Меняется то, кто контролирует денежные рельсы, кто видит транзакции, как работает расчётная финальность и на чьих серверах живёт ваш кошелёк.',
+    'about.p3':'«Архитектура денег» — это место, где эти процессы изучаются системно: без инфобизнес-упрощений, без крипто-хайпа, без PR центральных банков и без банковского лоббизма.',
+    'about.stat1':'тематических рубрик','about.stat2':'направлений анализа',
+    'p1.t':'Первоисточники','p1.d':'Документы BIS, ЕЦБ, МВФ, Банка России, ФРС — не пересказы, а разборы оригиналов',
+    'p2.t':'Архитектурная рамка','p2.d':'Не отдельные новости, а система: как ЦВЦБ, токенизация и платёжная инфраструктура складываются в новую архитектуру денег',
+    'p3.t':'Без bias','p3.d':'Независимая аналитика — без корпоративного, регуляторного или идеологического перекоса',
+    'p4.t':'Понятным языком','p4.d':'Сложные институциональные процессы — на ясном, точном языке. Без упрощения до банальности',
+    'topics.label':'Направления анализа','topics.title':'Что мы исследуем',
+    't1.t':'Цифровой рубль','t1.d':'Дизайн, лимиты, внедрение, инфраструктура и последствия для банков и граждан',
+    't2.t':'ЦВЦБ / CBDC','t2.d':'Розничные и оптовые, мировой опыт, кейсы провалов и успехов, архитектурные решения',
+    't3.t':'Токенизация','t3.d':'RWA, DLT, токенизированные депозиты, платформы — что реально работает',
+    't4.t':'Стейблкоины','t4.d':'Природа, регулирование, риски, роль в платёжной экосистеме',
+    't5.t':'Платёжная инфраструктура','t5.d':'СБП, SWIFT, PIX, карточные схемы, BigTech в платежах. Кто контролирует рельсы',
+    't6.t':'Регулирование','t6.d':'Правовые рамки, AML/KYC, финальность расчётов, лицензирование. Как право определяет архитектуру',
+    't7.t':'Трансграничные расчёты','t7.d':'Дедолларизация, mBridge, BRICS Pay, корреспондентские сети. Как меняется глобальная система',
+    't8.t':'DvP / PvP','t8.d':'Расчётные механизмы: поставка против платежа, платёж против платежа во взаимодействии с финансовыми рынками',
+    't9.t':'Будущее денег','t9.d':'Денежная теория, роль центральных банков, новая архитектура денежной системы',
+    'rubs.label':'Структура контента','rubs.title':'Рубрики','rubs.link':'Все материалы →',
+    'r.ab':'Азбука','r.ab.d':'Простые и точные объяснения ключевых понятий денежной инфраструктуры',
+    'r.pu':'Пульс','r.pu.d':'Короткие важные события — что произошло и что это реально означает',
+    'r.ra':'Радар','r.ra.d':'Еженедельная карта смыслов: что важно, что шум, что упустили',
+    'r.go':'Горизонт','r.go.d':'Месячные и квартальные структурные тренды — что меняется в архитектуре',
+    'r.ko':'Контур','r.ko.d':'Технологические и инфраструктурные разборы — как работает изнутри',
+    'r.rb':'Разбор','r.rb.d':'Аналитический разбор конкретного документа, доклада или рабочей бумаги',
+    'r.pr':'Право','r.pr.d':'Регулирование, правовые рамки, AML/KYC, финальность расчётов, лицензирование',
+    'r.fo':'Фокус','r.fo.d':'Одна страна, проект или организация — детальный разбор в центре внимания',
+    'r.mi':'Мифы','r.mi.d':'Разбор распространённых заблуждений: без полемики, с фактами',
+    'r.sc':'Сценарии','r.sc.d':'Практические кейсы и возможные модели применения в реальных условиях',
+    'r.by':'Быт','r.by.d':'Объяснение через повседневные ситуации — без терминов, с конкретными примерами',
+    'r.gl':'Голоса','r.gl.d':'Важные сигналы от центробанков, BIS, МВФ — что и зачем они говорят',
+    'mat.label':'Последние публикации','mat.title':'Материалы','mat.all':'Все материалы →','mat.all2':'Смотреть все материалы →',
+    'res.label':'Глубокий анализ','res.title':'Исследования',
+    'res1.tag':'Исследование · Апрель 2026',
+    'res1.t':'Публичный дискурс о розничных платежах и кейс ЦВЦБ',
+    'res1.d':'Разбор статьи Биндзайля (2026): почему обсуждение платёжной архитектуры структурно предвзято и что это означает для оценки аргументов за и против ЦВЦБ.',
+    'res.fl':'Ключевые выводы',
+    'res.f1':'Экспертиза в платёжной отрасли концентрируется у заинтересованных сторон — нейтральных голосов структурно мало',
+    'res.f2':'Аргумент «рынок уже справляется» содержит скрытую предпосылку о том, что частная олигополия — оптимальный результат',
+    'res.f3':'PIX решает ~50% задач ЦВЦБ, но не обеспечивает якорную функцию ЦБ на розничном уровне',
+    'res.cta1':'Читать полный разбор →',
+    'res2.tag':'Исследование · В разработке',
+    'res2.t':'Цифровой рубль: архитектура и последствия для банков',
+    'res2.d':'Системный анализ дизайна цифрового рубля: двухуровневая модель, холдинговые лимиты, роль банков как агентов.',
+    'res.wip':'Готовится к публикации',
+    'aside.t':'Нужна аналитика под вашу задачу?',
+    'aside.d':'Подготовим исследование, справку или брифинг — адаптированные под вашу отрасль, аудиторию и конкретный вопрос.',
+    'aside.btn':'Заказать исследование →',
+    'auth.label':'Авторы','auth.title':'Кто создаёт проект',
+    'a1.role':'Со-основатель, главный редактор',
+    'a1.bio':'Специализация — денежная теория, цифровые валюты центральных банков, платёжная инфраструктура. Работает с первоисточниками: документами BIS, ЕЦБ, Банка России. Ведёт Telegram-канал @cbdc_monitor.',
+    'a2.role':'Со-основатель, стратегия',
+    'a2.bio':'Специализация — регулирование цифровых финансов, токенизация, трансграничные расчёты. Работает с корпоративными клиентами и образовательными проектами в области цифровой экономики.',
+    'fw.label':'Аудитория','fw.title':'Для кого',
+    'fw.intro':'«Архитектура денег» создана для людей, которым нужна не сводка новостей, а понимание процессов.',
+    'fw1.t':'Банки и финорганизации','fw1.d':'Готовятся к внедрению цифрового рубля и хотят понять реальные последствия для бизнес-модели',
+    'fw2.t':'Финтех и платёжные компании','fw2.d':'Ищут не заголовки, а архитектурное понимание изменений в инфраструктуре расчётов',
+    'fw3.t':'Регуляторы и юристы','fw3.d':'Нужен системный разбор нормативных изменений, сравнительные кейсы, анализ первоисточников',
+    'fw4.t':'Исследователи и аналитики','fw4.d':'Структурированная база материалов с источниками и аналитической рамкой',
+    'fw5.t':'Преподаватели и студенты','fw5.d':'Структурированные объяснения, первоисточники, логика процессов — для учёбы и преподавания',
+    'fw6.t':'Умный читатель','fw6.d':'Хочет понять, что происходит с деньгами, без крипто-хайпа и без поверхностных упрощений',
+    'svc.label':'Форматы работы','svc.title':'Услуги','svc.order':'Заказать →',
+    's1.n':'01 · Аналитика','s1.t':'Аналитическое исследование','s1.d':'Структурированный анализ конкретного вопроса — не общедоступный материал, а ответ на вашу задачу. Отчёт 10-40 страниц с выводами, схемами, источниками и executive summary.',
+    's2.n':'02 · Обучение','s2.t':'Корпоративные программы','s2.d':'Системное понимание темы для вашей команды — от однодневного воркшопа до курса из модулей. Форматы: очно, онлайн, гибрид. Адаптация под уровень аудитории.',
+    's3.n':'03 · Выступления','s3.t':'Лекции и семинары','s3.d':'Экспертное выступление для вашей аудитории: конференция, университет, корпоративное мероприятие. 45-90 минут с Q&A или панельная дискуссия.',
+    's4.n':'04 · Консультации','s4.t':'Справки и консультации','s4.d':'Быстрый структурированный ответ на конкретный вопрос: аналитическая справка 2-5 страниц за 3-5 дней или консультационная сессия 60-90 минут.',
+    'tag.banks':'Банки','tag.fintech':'Финтех','tag.lawfirms':'Юрфирмы','tag.corps':'Корпорации',
+    'tag.regs':'Регуляторы','tag.treasuries':'Казначейства','tag.unis':'Университеты',
+    'tag.confs':'Конференции','tag.forums':'Форумы','tag.media':'Медиа',
+    'tag.boards':'Советы директоров','tag.startups':'Стартапы',
+    'tg.label':'Оперативно','tg.title':'Мы в Telegram<span id="tg-feed-badge"></span>',
+    'tg.desc':'@cbdc_monitor — ежедневный мониторинг и разборы: цифровой рубль, ЦВЦБ, токенизация, платёжная инфраструктура. Короткие форматы — сигналы, которые нельзя пропустить.',
+    'tg.btn':'Перейти в канал ↗','tg.read':'Читать в Telegram →','tg.loading':'Загрузка…',
+    'ord.label':'Работа с проектом','ord.title':'Нужна аналитика<br>под вашу задачу?',
+    'ord.desc':'Подготовим исследование, аналитическую справку или обучающую программу — адаптированные под вашу отрасль, аудиторию и конкретный вопрос. Ответим в течение суток.',
+    'ord.btn':'Написать в Telegram →','ord.what':'Что мы делаем',
+    'ord.li1':'Аналитические исследования 10-40 страниц','ord.li2':'Корпоративное обучение и лекции',
+    'ord.li3':'Аналитические справки за 3-5 дней','ord.li4':'Консультации и экспертные комментарии',
+    'ord.form':'Форма запроса',
+    'f.name.l':'Ваше имя','f.name.ph':'Имя','f.org.l':'Организация','f.org.ph':'Компания / вуз',
+    'f.con.l':'Email или Telegram','f.con.ph':'email@example.com или @username',
+    'f.type.l':'Тип запроса','f.type.0':'Выберите...','f.type.1':'Лекция / выступление',
+    'f.type.2':'Аналитическое исследование','f.type.3':'Аналитическая справка',
+    'f.type.4':'Корпоративное обучение','f.type.5':'Комментарий для медиа',
+    'f.type.6':'Партнёрство','f.type.7':'Другое',
+    'f.desc.l':'Опишите запрос','f.desc.ph':'Вопрос, тема, аудитория, контекст, пожелания по срокам...',
+    'f.submit':'Отправить запрос','f.note':'Ответим в течение 24 часов — по email или в Telegram',
+    'f.ok.t':'Заявка отправлена','f.ok.d':'Ответим в течение суток',
+    'foot.sub':'Независимая экспертная платформа о цифровых деньгах и платёжной инфраструктуре',
+    'foot.col1':'Материалы','foot.all':'Все материалы','foot.col2':'Темы','foot.cross':'Трансграничные',
+    'foot.col3':'Проект','foot.bindseil':'Разбор Биндзайля →',
+    'foot.copy':'© 2024–2026 Архитектура денег · Независимый экспертный проект · <a href="#">Политика конфиденциальности</a>',
+    'foot.privacy':'Политика конфиденциальности',
+    'badge':'Прототип · Май 2026',
+  },
+  en: {
+    'logo.name':'Architecture of Money','logo.sub':'expert platform',
+    'nav.materials':'Articles','nav.research':'Research','nav.rubrics':'Sections',
+    'nav.about':'About','nav.order':'Inquire',
+    'hero.eyebrow':'Expert platform on monetary infrastructure',
+    'hero.h1':'Money is changing<br><span>architecture.</span><br>We explain how.',
+    'hero.sub':'Independent analysis of digital money, payment infrastructure and monetary system transformation — no hype, no simplification.',
+    'hero.cta1':'Read articles →','hero.cta2':'Telegram channel ↗','hero.cta3':'Commission analytics','hero.scroll':'scroll',
+    'about.label':'About','about.title':'Architecture of Money',
+    'about.p1':'Money is not just an economic category. It is <strong>infrastructure</strong>: access rules, settlement finality, payment rails, legal framework, balance of public and private interests.',
+    'about.p2':'When a central bank issues a digital ruble — it is not only the form of money that changes. What changes is who controls the monetary rails, who sees transactions, how settlement finality works and on whose servers your wallet lives.',
+    'about.p3':'"Architecture of Money" is where these processes are studied systematically: without info-business simplifications, without crypto hype, without central bank PR and without banking lobbying.',
+    'about.stat1':'content sections','about.stat2':'analysis directions',
+    'p1.t':'Primary sources','p1.d':'BIS, ECB, IMF, Bank of Russia, Fed documents — not retellings, but analysis of originals',
+    'p2.t':'Analytical framework','p2.d':'Not individual news, but a system: how CBDCs, tokenization and payment infrastructure combine into a new architecture of money',
+    'p3.t':'No bias','p3.d':'Independent analysis — without corporate, regulatory or ideological distortion',
+    'p4.t':'Plain language','p4.d':'Complex institutional processes in clear, precise language. Without simplification to banality',
+    'topics.label':'Analysis directions','topics.title':'What we study',
+    't1.t':'Digital Ruble','t1.d':'Design, limits, implementation, infrastructure and implications for banks and citizens',
+    't2.t':'CBDC','t2.d':'Retail and wholesale, global experience, failure and success cases, architectural decisions',
+    't3.t':'Tokenization','t3.d':'RWA, DLT, tokenized deposits, platforms — what actually works',
+    't4.t':'Stablecoins','t4.d':'Nature, regulation, risks, role in the payment ecosystem',
+    't5.t':'Payment Infrastructure','t5.d':'SBP, SWIFT, PIX, card schemes, BigTech in payments. Who controls the rails',
+    't6.t':'Regulation','t6.d':'Legal frameworks, AML/KYC, settlement finality, licensing. How law shapes architecture',
+    't7.t':'Cross-border Settlements','t7.d':'De-dollarization, mBridge, BRICS Pay, correspondent networks. How the global system is changing',
+    't8.t':'DvP / PvP','t8.d':'Settlement mechanisms: delivery versus payment, payment versus payment in interaction with financial markets',
+    't9.t':'Future of Money','t9.d':'Monetary theory, the role of central banks, new architecture of the monetary system',
+    'rubs.label':'Content structure','rubs.title':'Sections','rubs.link':'All articles →',
+    'r.ab':'Glossary','r.ab.d':'Simple and precise explanations of key concepts in monetary infrastructure',
+    'r.pu':'Pulse','r.pu.d':'Brief important events — what happened and what it actually means',
+    'r.ra':'Radar','r.ra.d':'Weekly map of meaning: what matters, what is noise, what was missed',
+    'r.go':'Horizon','r.go.d':'Monthly and quarterly structural trends — what is changing in the architecture',
+    'r.ko':'Blueprint','r.ko.d':'Technological and infrastructure breakdowns — how it works from the inside',
+    'r.rb':'Deep Dive','r.rb.d':'Analytical breakdown of a specific document, report or working paper',
+    'r.pr':'Law','r.pr.d':'Regulation, legal frameworks, AML/KYC, settlement finality, licensing',
+    'r.fo':'Focus','r.fo.d':'One country, project or organization — a detailed breakdown at the center of attention',
+    'r.mi':'Myths','r.mi.d':'Debunking common misconceptions: without polemic, with facts',
+    'r.sc':'Scenarios','r.sc.d':'Practical cases and possible application models in real conditions',
+    'r.by':'Everyday','r.by.d':'Explanations through everyday situations — without jargon, with concrete examples',
+    'r.gl':'Voices','r.gl.d':'Important signals from central banks, BIS, IMF — what they say and why',
+    'mat.label':'Latest publications','mat.title':'Articles','mat.all':'All articles →','mat.all2':'View all articles →',
+    'res.label':'In-depth analysis','res.title':'Research',
+    'res1.tag':'Research · April 2026',
+    'res1.t':'Public discourse on retail payments and the CBDC case',
+    'res1.d':'Analysis of Bindseil (2026): why discussion of payment architecture is structurally biased and what this means for evaluating arguments for and against CBDC.',
+    'res.fl':'Key findings',
+    'res.f1':'Expertise in the payment industry is concentrated among interested parties — structurally few neutral voices',
+    'res.f2':'The "market already copes" argument contains a hidden premise that private oligopoly is the optimal result',
+    'res.f3':'PIX solves ~50% of CBDC objectives but does not provide the CB anchor function at the retail level',
+    'res.cta1':'Read full analysis →',
+    'res2.tag':'Research · In progress',
+    'res2.t':'Digital Ruble: architecture and implications for banks',
+    'res2.d':'Systematic analysis of digital ruble design: two-tier model, holding limits, the role of banks as agents.',
+    'res.wip':'Coming soon',
+    'aside.t':'Need analytics for your task?',
+    'aside.d':'We will prepare a research report, brief or briefing — adapted to your industry, audience and specific question.',
+    'aside.btn':'Commission research →',
+    'auth.label':'Authors','auth.title':'Who builds the project',
+    'a1.role':'Co-founder, Editor-in-chief',
+    'a1.bio':'Specializes in monetary theory, central bank digital currencies and payment infrastructure. Works with primary sources: BIS, ECB, Bank of Russia documents. Runs Telegram channel @cbdc_monitor.',
+    'a2.role':'Co-founder, Strategy',
+    'a2.bio':'Specializes in digital finance regulation, tokenization and cross-border settlements. Works with corporate clients and educational projects in the digital economy.',
+    'fw.label':'Audience','fw.title':'Who it\'s for',
+    'fw.intro':'"Architecture of Money" is for people who need not a news digest but an understanding of processes.',
+    'fw1.t':'Banks & financial institutions','fw1.d':'Preparing for digital ruble implementation and seeking to understand the real implications for their business model',
+    'fw2.t':'Fintech & payment companies','fw2.d':'Looking not for headlines, but for architectural understanding of changes in settlement infrastructure',
+    'fw3.t':'Regulators & lawyers','fw3.d':'Need systematic analysis of regulatory changes, comparative cases, primary source analysis',
+    'fw4.t':'Researchers & analysts','fw4.d':'Structured database of materials with sources and analytical framework',
+    'fw5.t':'Educators & students','fw5.d':'Structured explanations, primary sources, process logic — for study and teaching',
+    'fw6.t':'Curious readers','fw6.d':'Want to understand what is happening to money, without crypto hype and surface-level simplifications',
+    'svc.label':'Service formats','svc.title':'Services','svc.order':'Inquire →',
+    's1.n':'01 · Analytics','s1.t':'Analytical research','s1.d':'Structured analysis of a specific question — not generic content, but an answer to your task. 10-40 page report with findings, diagrams, sources and executive summary.',
+    's2.n':'02 · Training','s2.t':'Corporate programmes','s2.d':'Systematic understanding of the topic for your team — from a one-day workshop to a modular course. Formats: in-person, online, hybrid. Adapted to the audience level.',
+    's3.n':'03 · Speaking','s3.t':'Lectures & seminars','s3.d':'Expert presentation for your audience: conference, university, corporate event. 45–90 minutes with Q&A or panel discussion.',
+    's4.n':'04 · Consulting','s4.t':'Briefs & consultations','s4.d':'Quick structured answer to a specific question: analytical brief 2–5 pages in 3–5 days or consultation session 60–90 minutes.',
+    'tag.banks':'Banks','tag.fintech':'Fintech','tag.lawfirms':'Law firms','tag.corps':'Corporations',
+    'tag.regs':'Regulators','tag.treasuries':'Treasuries','tag.unis':'Universities',
+    'tag.confs':'Conferences','tag.forums':'Forums','tag.media':'Media',
+    'tag.boards':'Boards of directors','tag.startups':'Startups',
+    'tg.label':'Live updates','tg.title':'We\'re on Telegram<span id="tg-feed-badge"></span>',
+    'tg.desc':'@cbdc_monitor — daily monitoring and analysis: digital ruble, CBDC, tokenization, payment infrastructure. Short formats — signals you can\'t miss.',
+    'tg.btn':'Join the channel ↗','tg.read':'Read on Telegram →','tg.loading':'Loading…',
+    'ord.label':'Work with us','ord.title':'Need analytics<br>for your task?',
+    'ord.desc':'We will prepare a research report, analytical brief or training programme — adapted to your industry, audience and specific question. Response within 24 hours.',
+    'ord.btn':'Message on Telegram →','ord.what':'What we do',
+    'ord.li1':'Analytical research reports, 10–40 pages','ord.li2':'Corporate training and lectures',
+    'ord.li3':'Analytical briefs in 3–5 days','ord.li4':'Consultations and expert commentary',
+    'ord.form':'Request form',
+    'f.name.l':'Your name','f.name.ph':'Name','f.org.l':'Organization','f.org.ph':'Company / university',
+    'f.con.l':'Email or Telegram','f.con.ph':'email@example.com or @username',
+    'f.type.l':'Request type','f.type.0':'Select...','f.type.1':'Lecture / speaking',
+    'f.type.2':'Analytical research','f.type.3':'Analytical brief',
+    'f.type.4':'Corporate training','f.type.5':'Media commentary',
+    'f.type.6':'Partnership','f.type.7':'Other',
+    'f.desc.l':'Describe your request','f.desc.ph':'Question, topic, audience, context, timeline...',
+    'f.submit':'Submit request','f.note':'Response within 24 hours — by email or Telegram',
+    'f.ok.t':'Request sent','f.ok.d':'We\'ll reply within 24 hours',
+    'foot.sub':'Independent expert platform on digital money and payment infrastructure',
+    'foot.col1':'Articles','foot.all':'All articles','foot.col2':'Topics','foot.cross':'Cross-border',
+    'foot.col3':'Project','foot.bindseil':'Bindseil analysis →',
+    'foot.copy':'© 2024–2026 Architecture of Money · Independent expert project · <a href="#">Privacy policy</a>',
+    'foot.privacy':'Privacy policy',
+    'badge':'Prototype · May 2026',
+  }
+};
+
+let lang = localStorage.getItem('lang') || 'ru';
+
+function applyLang(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  document.documentElement.setAttribute('lang', l);
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const t = I18N[l][el.dataset.i18n];
+    if (t !== undefined) el.textContent = t;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const t = I18N[l][el.dataset.i18nHtml];
+    if (t !== undefined) el.innerHTML = t;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const t = I18N[l][el.dataset.i18nPh];
+    if (t !== undefined) el.placeholder = t;
+  });
+  const btn = document.getElementById('lang-btn');
+  if (btn) btn.textContent = l === 'ru' ? 'EN' : 'РУ';
+}
+
 
 // ╔══════════════════════════════════════════════════════════════╗
 // ║  РЕЗЕРВНЫЕ ДАННЫЕ                                            ║
@@ -1202,6 +1439,7 @@ function observeCards() {
 showLoading();
 observeCards();
 loadFromTelegram();
+applyLang(lang);
 </script>
 </body>
 </html>
