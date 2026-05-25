@@ -285,6 +285,13 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
   .nav-links{display:none}
   .topics-head,.materials-head,.rubrics-head{flex-direction:column;gap:16px;align-items:flex-start}
 }
+/* ── FEED STATE ── */
+.mat-loading{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:56px 32px;color:var(--muted);font-size:13px;letter-spacing:.04em}
+.mat-loading::before{content:'';width:16px;height:16px;border-radius:50%;border:2px solid var(--divider);border-top-color:var(--gold);animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.feed-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-left:12px;vertical-align:middle}
+.feed-badge.live{background:rgba(93,202,165,.12);color:#5DCAA5;border:1px solid rgba(93,202,165,.25)}
+.feed-badge.cached{background:rgba(201,168,76,.1);color:#C9A84C;border:1px solid rgba(201,168,76,.2)}
 </style>
 </head>
 <body>
@@ -744,7 +751,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
     <div class="telegram-inner">
       <div class="telegram-left">
         <div class="section-label">Оперативно</div>
-        <h2 class="section-title section-title-light">Мы в Telegram</h2>
+        <h2 class="section-title section-title-light">Мы в Telegram<span id="tg-feed-badge"></span></h2>
         <p>@cbdc_monitor — ежедневный мониторинг и разборы: цифровой рубль, ЦВЦБ, токенизация, платёжная инфраструктура. Короткие форматы — сигналы, которые нельзя пропустить.</p>
         <a href="https://t.me/cbdc_monitor" target="_blank" class="btn-primary">Перейти в канал ↗</a>
         <div class="telegram-url">t.me/cbdc_monitor</div>
@@ -889,9 +896,19 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
 
 <script>
 // ╔══════════════════════════════════════════════════════════════╗
-// ║  ДОБАВИТЬ НОВЫЙ МАТЕРИАЛ                                     ║
-// ║  → вставьте объект в начало массива ARTICLES ниже            ║
-// ║  → сайт автоматически покажет последние 6 материалов         ║
+// ║  TELEGRAM АВТОЗАГРУЗКА                                       ║
+// ║  Сайт сам подтягивает ленту из @cbdc_monitor.                ║
+// ║  Если Telegram недоступен — показываются данные из ARTICLES. ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+// ══ НАСТРОЙКИ ══════════════════════════════════════════════════
+const TG_CHANNEL  = 'cbdc_monitor';
+const POSTS_COUNT = 10;
+
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  РЕЗЕРВНЫЕ ДАННЫЕ                                            ║
+// ║  Используются если Telegram недоступен.                      ║
+// ║  Чтобы добавить вручную — вставьте объект первым в ARTICLES. ║
 // ╚══════════════════════════════════════════════════════════════╝
 //
 // Поля объекта:
@@ -967,7 +984,7 @@ const ARTICLES = [
 //
 // Поля: rubric / date / title / desc / url
 
-const TG_POSTS = [
+const TG_POSTS_FALLBACK = [
 
   // ── ДОБАВЛЯЙТЕ НОВЫЕ ЗАПИСИ СЮДА ▼ ──────────────────────────
 
@@ -1013,18 +1030,65 @@ const RUBRICS = {
   'Голоса':   '#D4B870',
 };
 
+const RUBRIC_TAGS = {
+  '#азбука':   'Азбука',
+  '#пульс':    'Пульс',
+  '#радар':    'Радар',
+  '#горизонт': 'Горизонт',
+  '#контур':   'Контур',
+  '#разбор':   'Разбор',
+  '#право':    'Право',
+  '#фокус':    'Фокус',
+  '#мифы':     'Мифы',
+  '#сценарии': 'Сценарии',
+  '#быт':      'Быт',
+  '#голоса':   'Голоса',
+};
+
 
 // ══ РЕНДЕР МАТЕРИАЛОВ ══════════════════════════════════════════
-function renderMaterials() {
+function parseTgItem(item) {
+  const raw = (item.description || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const lower = raw.toLowerCase();
+  let rubric = 'Пульс';
+  for (const [tag, name] of Object.entries(RUBRIC_TAGS)) {
+    if (lower.includes(tag)) { rubric = name; break; }
+  }
+  const desc = raw.replace(/#\S+/g, '').replace(/\s+/g, ' ').trim().slice(0, 220);
+  const words = raw.split(/\s+/).length;
+  const readTime = Math.max(1, Math.round(words / 180)) + ' мин';
+  const pub = new Date(item.pubDate);
+  const months = ['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+  const date = isNaN(pub.getTime()) ? '' : pub.getDate() + ' ' + months[pub.getMonth()];
+  const titleRaw = item.title || raw.split('\n')[0] || 'Новый пост';
+  const title = titleRaw.replace(/<[^>]+>/g, '').replace(/#\S+/g, '').trim().slice(0, 100);
+  return { rubric, date, title, desc, readTime,
+           url: item.link || 'https://t.me/' + TG_CHANNEL,
+           featured: false, tags: [] };
+}
+
+function setBadge(type) {
+  const badge = document.getElementById('tg-feed-badge');
+  if (!badge) return;
+  badge.className = 'feed-badge ' + type;
+  badge.textContent = type === 'live' ? 'LIVE' : 'CACHED';
+}
+
+function showLoading() {
+  const grid = document.getElementById('mat-grid');
+  const list = document.getElementById('tg-posts-list');
+  if (grid) grid.innerHTML = '<div class="mat-loading">Загрузка материалов…</div>';
+  if (list) list.innerHTML = '<div style="padding:24px 0;color:var(--muted);font-size:13px">Загрузка…</div>';
+}
+
+function renderMaterialsFrom(articles) {
   const grid = document.getElementById('mat-grid');
   if (!grid) return;
-
-  const featIdx = ARTICLES.findIndex(a => a.featured);
-  const fi = featIdx >= 0 ? featIdx : 0;
-  const featured = ARTICLES[fi];
-  const rest = ARTICLES.filter((_, i) => i !== fi).slice(0, 5);
+  const fi = Math.max(0, articles.findIndex(a => a.featured));
+  const featured = articles[fi];
+  if (!featured) { grid.innerHTML = ''; return; }
+  const rest = articles.filter((_, i) => i !== fi).slice(0, 5);
   const fc = RUBRICS[featured.rubric] || '#8FA8C8';
-
   let html = `
     <a class="mat-card mat-card-featured" href="${featured.url || '#'}">
       <div class="mat-rubric">
@@ -1041,7 +1105,6 @@ function renderMaterials() {
       ${(featured.tags || []).map(t => `<span class="mat-tag">${t}</span>`).join('')}
       <div class="mat-arr">→</div>
     </a>`;
-
   rest.forEach((a, i) => {
     if (i === 2) html += `<div class="mat-divider"></div>`;
     const c = RUBRICS[a.rubric] || '#8FA8C8';
@@ -1060,26 +1123,47 @@ function renderMaterials() {
       <div class="mat-arr">→</div>
     </a>`;
   });
-
   grid.innerHTML = html;
+  observeCards();
 }
 
-
-// ══ РЕНДЕР TELEGRAM-ПОСТОВ ══════════════════════════════════════
-function renderTgPosts() {
+function renderTgPostsFrom(posts) {
   const list = document.getElementById('tg-posts-list');
   if (!list) return;
-  list.innerHTML = TG_POSTS.slice(0, 3).map(p => `
-    <a class="tg-post" href="${p.url || 'https://t.me/cbdc_monitor'}" target="_blank">
+  list.innerHTML = posts.slice(0, 3).map(p => `
+    <a class="tg-post" href="${p.url || 'https://t.me/' + TG_CHANNEL}" target="_blank">
       <div class="tg-post-tag">${p.rubric} · ${p.date}</div>
       <div class="tg-post-t">${p.title}</div>
       <div class="tg-post-d">${p.desc}</div>
       <div class="tg-post-meta">Читать в Telegram →</div>
     </a>`).join('');
+  observeCards();
 }
 
+async function loadFromTelegram() {
+  const rss = 'https://rsshub.app/telegram/channel/' + TG_CHANNEL;
+  const api = 'https://api.rss2json.com/v1/api.json?rss_url=' +
+              encodeURIComponent(rss) + '&count=' + POSTS_COUNT;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 7000);
+  try {
+    const res = await fetch(api, { signal: ctrl.signal });
+    clearTimeout(timer);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if (data.status !== 'ok' || !data.items?.length) throw new Error('empty');
+    const parsed = data.items.map(parseTgItem);
+    renderMaterialsFrom([...ARTICLES, ...parsed]);
+    renderTgPostsFrom(parsed);
+    setBadge('live');
+  } catch (e) {
+    clearTimeout(timer);
+    renderMaterialsFrom(ARTICLES);
+    renderTgPostsFrom(TG_POSTS_FALLBACK);
+    setBadge('cached');
+  }
+}
 
-// ══ НАВИГАЦИЯ / ФОРМА / АНИМАЦИЯ ════════════════════════════════
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 40);
@@ -1091,11 +1175,12 @@ function handleSubmit(e) {
   document.getElementById('form-success').style.display = 'block';
 }
 
-const observer = new IntersectionObserver((entries) => {
+const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.style.opacity = '1';
       entry.target.style.transform = 'translateY(0)';
+      revealObs.unobserve(entry.target);
     }
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
@@ -1105,17 +1190,18 @@ function observeCards() {
     '.topic-card, .rubric-card, .mat-card, .author-card, ' +
     '.forwhom-card, .service-card, .research-card, .tg-post, .about-principle'
   ).forEach(el => {
+    if (el.dataset.obs) return;
+    el.dataset.obs = '1';
     el.style.opacity = '0';
     el.style.transform = 'translateY(16px)';
     el.style.transition = 'opacity .4s ease, transform .4s ease';
-    observer.observe(el);
+    revealObs.observe(el);
   });
 }
 
-// ══ ИНИЦИАЛИЗАЦИЯ ══════════════════════════════════════════════
-renderMaterials();
-renderTgPosts();
+showLoading();
 observeCards();
+loadFromTelegram();
 </script>
 </body>
 </html>
