@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Архитектура денег — прототип сайта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & VARS ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:    #0D1B3E;
+  --navy2:   #0F1E40;
+  --navy3:   #152547;
+  --border:  #1E3466;
+  --gold:    #C9A84C;
+  --gold-d:  #A8893A;
+  --cream:   #F8F6F1;
+  --cream2:  #F0EDE6;
+  --white:   #FFFFFF;
+  --ink:     #1A1A2E;
+  --ink2:    #2E2E48;
+  --muted:   #6B7A99;
+  --blue-lt: #8FA8C8;
+  --divider: #E2E0D8;
+  --serif:   'Playfair Display', Georgia, serif;
+  --sans:    'Inter', system-ui, sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.6;font-size:16px}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.container{max-width:1200px;margin:0 auto;padding:0 32px}
+.container-narrow{max-width:860px;margin:0 auto;padding:0 32px}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,246,241,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--divider);transition:box-shadow .2s}
+.nav.scrolled{box-shadow:0 2px 16px rgba(13,27,62,.08)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1200px;margin:0 auto;padding:0 32px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:32px;height:32px;background:var(--navy);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark svg{width:18px;height:18px}
+.logo-text{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--navy);letter-spacing:.01em;line-height:1.2}
+.logo-sub{font-size:9px;font-weight:500;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;line-height:1}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);letter-spacing:.02em;transition:color .15s}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{font-size:12px;font-weight:600;padding:8px 18px;border:1px solid var(--navy);border-radius:3px;color:var(--navy);letter-spacing:.04em;text-transform:uppercase;transition:background .15s,color .15s}
+.nav-cta:hover{background:var(--navy);color:var(--white)}
+
+/* ── HERO ── */
+.hero{background:var(--navy);min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding-top:64px}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(30,52,102,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(30,52,102,.35) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:80px 32px}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::after{content:'';flex:1;max-width:48px;height:1px;background:var(--gold);opacity:.5}
+.hero-h1{font-family:var(--serif);font-size:clamp(40px,6vw,80px);font-weight:700;color:var(--white);line-height:1.1;letter-spacing:-.01em;margin-bottom:28px;max-width:700px}
+.hero-h1 span{color:var(--gold)}
+.hero-sub{font-size:clamp(15px,2vw,18px);color:var(--blue-lt);line-height:1.7;max-width:520px;margin-bottom:44px;font-weight:300}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--gold);color:var(--navy);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;transition:background .15s,transform .1s}
+.btn-primary:hover{background:var(--gold-d);transform:translateY(-1px)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:1px solid rgba(201,168,76,.4);color:var(--blue-lt);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;border-radius:3px;transition:border-color .15s,color .15s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;border-radius:3px;transition:border-color .15s,color .15s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);color:var(--white)}
+.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.3);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(rgba(201,168,76,.5),transparent)}
+
+/* ── SECTION LABELS ── */
+.section-label{font-size:10px;font-weight:600;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
+.section-title{font-family:var(--serif);font-size:clamp(26px,3.5vw,40px);font-weight:700;color:var(--navy);line-height:1.2;letter-spacing:-.01em}
+.section-title-light{color:var(--white)}
+.gold-rule{width:48px;height:3px;background:var(--gold);margin:20px 0 0;border-radius:2px}
+
+/* ── ABOUT ── */
+.about{padding:100px 0;background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-text{font-size:17px;color:var(--ink2);line-height:1.85;margin-top:32px}
+.about-text p+p{margin-top:18px}
+.about-text strong{color:var(--navy);font-weight:600}
+.about-meta{margin-top:48px;padding-top:32px;border-top:1px solid var(--divider);display:flex;gap:40px}
+.about-stat-n{font-family:var(--serif);font-size:36px;font-weight:700;color:var(--navy)}
+.about-stat-l{font-size:12px;color:var(--muted);letter-spacing:.06em;margin-top:2px;text-transform:uppercase}
+.about-right{padding-top:28px}
+.about-principle{padding:20px 24px;border-left:2px solid var(--gold);margin-bottom:16px;background:var(--cream)}
+.about-principle-t{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.about-principle-d{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ── TOPICS ── */
+.topics{padding:80px 0;background:var(--cream)}
+.topics-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.topics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.topic-card{background:var(--white);padding:28px 24px;cursor:pointer;transition:background .15s;position:relative;overflow:hidden}
+.topic-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);transform:scaleY(0);transition:transform .2s;transform-origin:bottom}
+.topic-card:hover::before{transform:scaleY(1)}
+.topic-card:hover{background:var(--cream)}
+.topic-n{font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+.topic-t{font-size:16px;font-weight:600;color:var(--navy);margin-bottom:8px;line-height:1.3}
+.topic-d{font-size:13px;color:var(--muted);line-height:1.6}
+.topic-arr{position:absolute;bottom:24px;right:24px;font-size:16px;color:var(--divider);transition:color .15s}
+.topic-card:hover .topic-arr{color:var(--gold)}
+
+/* ── RUBRICS ── */
+.rubrics{padding:80px 0;background:var(--navy)}
+.rubrics-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.rubrics-link{font-size:12px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.rubrics-link:hover{opacity:.8}
+.rubrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.rubric-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:20px;cursor:pointer;transition:background .15s,border-color .15s}
+.rubric-card:hover{background:rgba(255,255,255,.07);border-color:rgba(201,168,76,.4)}
+.rubric-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:12px;margin-bottom:12px}
+.rubric-t{font-size:14px;font-weight:600;color:var(--white);margin-bottom:6px;line-height:1.3}
+.rubric-d{font-size:12px;color:var(--blue-lt);line-height:1.6}
+/* rubric colors */
+.rc-ab{background:rgba(201,168,76,.15);color:#E8D9A8;border:1px solid rgba(201,168,76,.25)}
+.rc-pu{background:rgba(93,202,165,.15);color:#5DCAA5;border:1px solid rgba(93,202,165,.25)}
+.rc-ra{background:rgba(133,183,235,.15);color:#85B7EB;border:1px solid rgba(133,183,235,.25)}
+.rc-go{background:rgba(175,169,236,.15);color:#AFA9EC;border:1px solid rgba(175,169,236,.25)}
+.rc-ko{background:rgba(149,180,210,.15);color:#95B4D2;border:1px solid rgba(149,180,210,.25)}
+.rc-rb{background:rgba(93,202,165,.12);color:#7ECFBA;border:1px solid rgba(93,202,165,.2)}
+.rc-pr{background:rgba(133,183,235,.12);color:#70A8D8;border:1px solid rgba(133,183,235,.2)}
+.rc-fo{background:rgba(250,199,117,.15);color:#FAC775;border:1px solid rgba(250,199,117,.25)}
+.rc-mi{background:rgba(245,196,179,.15);color:#F5C4B3;border:1px solid rgba(245,196,179,.25)}
+.rc-sc{background:rgba(144,200,144,.12);color:#90C890;border:1px solid rgba(144,200,144,.2)}
+.rc-by{background:rgba(180,180,180,.1);color:#B0BAC8;border:1px solid rgba(180,180,180,.2)}
+.rc-gl{background:rgba(201,168,76,.1);color:#D4B870;border:1px solid rgba(201,168,76,.2)}
+
+/* ── MATERIALS ── */
+.materials{padding:80px 0;background:var(--cream2)}
+.materials-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.materials-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2px}
+.mat-card{background:var(--white);padding:28px;cursor:pointer;transition:background .15s;position:relative}
+.mat-card:hover{background:var(--cream)}
+.mat-card-featured{grid-row:span 2}
+.mat-rubric{display:inline-flex;align-items:center;gap:6px;margin-bottom:14px}
+.mat-rubric-dot{width:6px;height:6px;border-radius:50%}
+.mat-rubric-name{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mat-t{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:10px}
+.mat-card:not(.mat-card-featured) .mat-t{font-size:15px}
+.mat-d{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:16px}
+.mat-card:not(.mat-card-featured) .mat-d{display:none}
+.mat-meta{display:flex;align-items:center;gap:14px;font-size:11px;color:var(--muted);letter-spacing:.03em}
+.mat-meta-sep{width:3px;height:3px;border-radius:50%;background:var(--divider)}
+.mat-arr{position:absolute;bottom:24px;right:24px;font-size:14px;color:var(--divider);transition:color .15s}
+.mat-card:hover .mat-arr{color:var(--gold)}
+.mat-divider{grid-column:1/-1;height:2px;background:var(--cream2)}
+.mat-card-featured .mat-t{font-size:22px}
+.mat-card-featured .mat-d{display:block}
+.mat-tag{display:inline-block;font-size:10px;font-weight:500;padding:3px 9px;background:var(--cream2);border-radius:2px;color:var(--muted);margin-top:12px;margin-right:4px}
+.all-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;padding-bottom:2px;border-bottom:2px solid var(--gold)}
+.all-link:hover{color:var(--gold-d)}
+
+/* ── RESEARCH ── */
+.research{padding:80px 0;background:var(--white)}
+.research-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px}
+.research-card{border:1px solid var(--divider);border-radius:6px;overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .15s}
+.research-card:hover{box-shadow:0 8px 32px rgba(13,27,62,.1);transform:translateY(-2px)}
+.research-card-banner{height:6px;background:linear-gradient(90deg,var(--gold),var(--navy))}
+.research-card-body{padding:28px}
+.research-tag{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.research-t{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:12px}
+.research-d{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:20px}
+.research-findings{border-top:1px solid var(--divider);padding-top:16px;margin-top:4px}
+.research-findings-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.research-finding{display:flex;gap:10px;margin-bottom:8px;font-size:12px;color:var(--ink2);line-height:1.55}
+.research-finding::before{content:'○';color:var(--gold);flex-shrink:0;font-size:10px;margin-top:2px}
+.research-cta{margin-top:20px;font-size:12px;font-weight:600;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.research-cta:hover{color:var(--gold)}
+.research-aside{background:var(--navy);border-radius:6px;padding:32px;display:flex;flex-direction:column;justify-content:space-between}
+.research-aside-t{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:16px}
+.research-aside-d{font-size:13px;color:var(--blue-lt);line-height:1.65;margin-bottom:28px}
+.research-aside-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--gold);color:var(--navy);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;width:fit-content;transition:background .15s}
+.research-aside-btn:hover{background:var(--gold-d)}
+
+/* ── AUTHORS ── */
+.authors{padding:80px 0;background:var(--cream)}
+.authors-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px}
+.author-card{background:var(--white);border:1px solid var(--divider);border-radius:6px;padding:32px;display:flex;gap:24px}
+.author-avatar{width:72px;height:72px;border-radius:4px;background:var(--navy);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:22px;font-weight:700;color:var(--gold)}
+.author-info{flex:1}
+.author-name{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.author-role{font-size:12px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+.author-bio{font-size:13px;color:var(--muted);line-height:1.65}
+.author-links{display:flex;gap:12px;margin-top:16px}
+.author-link{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:color .15s}
+.author-link:hover{color:var(--navy)}
+
+/* ── FOR WHOM ── */
+.forwhom{padding:80px 0;background:var(--navy2)}
+.forwhom-head{margin-bottom:48px}
+.forwhom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.forwhom-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:24px;transition:background .15s,border-color .15s}
+.forwhom-card:hover{background:rgba(255,255,255,.07);border-color:rgba(201,168,76,.3)}
+.forwhom-icon{width:40px;height:40px;border-radius:4px;background:rgba(201,168,76,.12);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.forwhom-t{font-size:15px;font-weight:600;color:var(--white);margin-bottom:8px}
+.forwhom-d{font-size:13px;color:var(--blue-lt);line-height:1.6}
+
+/* ── SERVICES ── */
+.services{padding:80px 0;background:var(--cream2)}
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:48px}
+.service-card{background:var(--white);padding:32px;cursor:pointer;transition:background .15s;position:relative}
+.service-card:hover{background:var(--cream)}
+.service-n{font-size:10px;font-weight:600;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.service-t{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--navy);margin-bottom:10px;line-height:1.25}
+.service-d{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:20px}
+.service-tags{display:flex;flex-wrap:wrap;gap:6px}
+.service-tag{font-size:10px;font-weight:500;padding:4px 10px;border:1px solid var(--divider);border-radius:2px;color:var(--muted)}
+.service-arrow{position:absolute;top:32px;right:32px;width:32px;height:32px;border:1px solid var(--divider);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--muted);transition:border-color .15s,color .15s,background .15s}
+.service-card:hover .service-arrow{border-color:var(--gold);color:var(--gold)}
+
+/* ── TELEGRAM ── */
+.telegram{padding:80px 0;background:var(--navy)}
+.telegram-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.telegram-left .section-label{color:rgba(201,168,76,.7)}
+.telegram-left .section-title{color:var(--white);margin-top:8px}
+.telegram-left p{font-size:16px;color:var(--blue-lt);line-height:1.7;margin-top:20px;margin-bottom:32px}
+.telegram-url{font-size:13px;color:var(--gold);letter-spacing:.04em;display:flex;align-items:center;gap:8px;margin-top:16px}
+.tg-posts{display:flex;flex-direction:column;gap:12px}
+.tg-post{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:6px;padding:16px 18px;cursor:pointer;transition:background .15s,border-color .15s}
+.tg-post:hover{background:rgba(255,255,255,.08);border-color:rgba(201,168,76,.3)}
+.tg-post-tag{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.tg-post-t{font-size:13px;font-weight:500;color:var(--white);line-height:1.45;margin-bottom:6px}
+.tg-post-d{font-size:11px;color:var(--blue-lt);line-height:1.5}
+.tg-post-meta{font-size:10px;color:#4A6494;margin-top:10px}
+
+/* ── ORDER CTA ── */
+.order{padding:80px 0;background:var(--ink)}
+.order-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.order-left .section-title{color:var(--white)}
+.order-left p{font-size:16px;color:rgba(255,255,255,.55);line-height:1.7;margin-top:20px;margin-bottom:32px}
+.order-left .btn-primary{margin-top:0}
+.order-right{}
+.order-form{display:flex;flex-direction:column;gap:14px}
+.order-form input,
+.order-form select,
+.order-form textarea{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:13px 16px;font-family:var(--sans);font-size:14px;color:var(--white);outline:none;transition:border-color .15s;width:100%}
+.order-form input::placeholder,
+.order-form textarea::placeholder{color:rgba(255,255,255,.3)}
+.order-form input:focus,
+.order-form select:focus,
+.order-form textarea:focus{border-color:rgba(201,168,76,.5)}
+.order-form select{color:rgba(255,255,255,.6)}
+.order-form select option{background:var(--ink);color:var(--white)}
+.order-form textarea{resize:vertical;min-height:100px}
+.order-form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.order-form-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.order-form-group{display:flex;flex-direction:column}
+.order-submit{padding:14px 28px;background:var(--gold);color:var(--navy);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:none;border-radius:3px;cursor:pointer;transition:background .15s;font-family:var(--sans);margin-top:4px}
+.order-submit:hover{background:var(--gold-d)}
+.order-note{font-size:11px;color:rgba(255,255,255,.3);margin-top:10px;text-align:center}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 32px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand .logo-mark{width:36px;height:36px;margin-bottom:16px}
+.footer-brand-name{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--white);margin-bottom:6px}
+.footer-brand-sub{font-size:12px;color:var(--blue-lt);line-height:1.6;max-width:240px;margin-bottom:24px}
+.footer-tg{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;border:1px solid rgba(201,168,76,.3);padding:9px 18px;border-radius:3px;transition:border-color .15s,background .15s}
+.footer-tg:hover{border-color:var(--gold);background:rgba(201,168,76,.08)}
+.footer-col-title{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:20px}
+.footer-links{display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:var(--blue-lt);transition:color .15s}
+.footer-links a:hover{color:var(--white)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:11px;color:#3D5278;letter-spacing:.04em}
+.footer-copy a{color:#4A6494;transition:color .15s}
+.footer-copy a:hover{color:var(--blue-lt)}
+
+/* ── UTILS ── */
+.mt-4{margin-top:16px}
+.mt-6{margin-top:24px}
+.mt-8{margin-top:32px}
+.divider-line{height:1px;background:var(--divider);margin:48px 0}
+.badge-proto{position:fixed;bottom:20px;right:20px;background:var(--navy);color:var(--gold);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:1px solid rgba(201,168,76,.3);z-index:200;pointer-events:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .about-grid,.topics-grid,.rubrics-grid,.authors-grid,.forwhom-grid,.services-grid,.telegram-inner,.order-inner,.research-grid,.footer-grid{grid-template-columns:1fr}
+  .materials-grid{grid-template-columns:1fr}
+  .mat-card-featured{grid-row:auto}
+  .hero-h1{font-size:36px}
+  .container,.container-narrow{padding:0 20px}
+  .nav-links{display:none}
+  .topics-head,.materials-head,.rubrics-head{flex-direction:column;gap:16px;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 18 18" fill="none">
+          <rect x="1" y="1" width="7" height="7" stroke="#C9A84C" stroke-width="1.5"/>
+          <rect x="10" y="1" width="7" height="7" stroke="#C9A84C" stroke-width="1.5" opacity=".5"/>
+          <rect x="1" y="10" width="7" height="7" stroke="#C9A84C" stroke-width="1.5" opacity=".5"/>
+          <line x1="10" y1="10" x2="17" y2="17" stroke="#C9A84C" stroke-width="1.5"/>
+          <line x1="17" y1="10" x2="10" y2="17" stroke="#C9A84C" stroke-width="1.5" opacity=".5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-text">Архитектура денег</div>
+        <div class="logo-sub">экспертная платформа</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#materials">Материалы</a>
+      <a href="#research">Исследования</a>
+      <a href="#rubrics">Рубрики</a>
+      <a href="#about-proj">О проекте</a>
+      <a href="#order" class="nav-cta">Заказать</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Экспертная платформа о денежной инфраструктуре</div>
+    <h1 class="hero-h1">Деньги меняют<br><span>архитектуру.</span><br>Мы объясняем, как.</h1>
+    <p class="hero-sub">Независимая аналитика о цифровых деньгах, платёжной инфраструктуре и трансформации денежной системы — без хайпа, без упрощений.</p>
+    <div class="hero-actions">
+      <a href="#materials" class="btn-primary">Читать материалы →</a>
+      <a href="https://t.me/cbdc_monitor" target="_blank" class="btn-outline">Telegram-канал ↗</a>
+      <a href="#order" class="btn-ghost">Заказать аналитику</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>прокрутить</span>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section class="about" id="about-proj">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">Что такое</div>
+        <h2 class="section-title">Архитектура денег</h2>
+        <div class="gold-rule"></div>
+        <div class="about-text">
+          <p>Деньги — это не просто экономическая категория. Это <strong>инфраструктура</strong>: правила доступа, расчётная финальность, платёжные рельсы, правовой контур, баланс публичных и частных интересов.</p>
+          <p>Когда центральный банк выпускает цифровой рубль — меняется не только форма денег. Меняется то, кто контролирует денежные рельсы, кто видит транзакции, как работает расчётная финальность и на чьих серверах живёт ваш кошелёк.</p>
+          <p>«Архитектура денег» — это место, где эти процессы изучаются системно: без инфобизнес-упрощений, без крипто-хайпа, без PR центральных банков и без банковского лоббизма.</p>
+        </div>
+        <div class="about-meta">
+          <div>
+            <div class="about-stat-n">12</div>
+            <div class="about-stat-l">тематических рубрик</div>
+          </div>
+          <div>
+            <div class="about-stat-n">9</div>
+            <div class="about-stat-l">направлений анализа</div>
+          </div>
+          <div>
+            <div class="about-stat-n">t.me</div>
+            <div class="about-stat-l">cbdc_monitor</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-right">
+        <div class="about-principle">
+          <div class="about-principle-t">Первоисточники</div>
+          <div class="about-principle-d">Документы BIS, ЕЦБ, МВФ, Банка России, ФРС — не пересказы, а разборы оригиналов</div>
+        </div>
+        <div class="about-principle">
+          <div class="about-principle-t">Архитектурная рамка</div>
+          <div class="about-principle-d">Не отдельные новости, а система: как ЦВЦБ, токенизация и платёжная инфраструктура складываются в новую архитектуру денег</div>
+        </div>
+        <div class="about-principle">
+          <div class="about-principle-t">Без bias</div>
+          <div class="about-principle-d">Независимая аналитика — без корпоративного, регуляторного или идеологического перекоса</div>
+        </div>
+        <div class="about-principle">
+          <div class="about-principle-t">Понятным языком</div>
+          <div class="about-principle-d">Сложные институциональные процессы — на ясном, точном языке. Без упрощения до банальности</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TOPICS ══ -->
+<section class="topics" id="topics">
+  <div class="container">
+    <div class="topics-head">
+      <div>
+        <div class="section-label">Направления анализа</div>
+        <h2 class="section-title">Что мы исследуем</h2>
+      </div>
+    </div>
+    <div class="topics-grid">
+      <div class="topic-card">
+        <div class="topic-n">01</div>
+        <div class="topic-t">Цифровой рубль</div>
+        <div class="topic-d">Дизайн, лимиты, внедрение, инфраструктура и последствия для банков и граждан</div>
+        <div class="topic-arr">→</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-n">02</div>
+        <div class="topic-t">ЦВЦБ / CBDC</div>
+        <div class="topic-d">Розничные и оптовые, мировой опыт, кейсы провалов и успехов, архитектурные решения</div>
+        <div class="topic-arr">→</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-n">03</div>
+        <div class="topic-t">Токенизация</div>
+        <div class="topic-d">RWA, DLT, токенизированные депозиты, платформы — что реально работает</div>
+        <div class="topic-arr">→</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-n">04</div>
+        <div class="topic-t">Стейблкоины</div>
+        <div class="topic-d">Природа, регулирование, риски, роль в платёжной экосистеме</div>
+        <div class="topic-arr">→</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-n">05</div>
+        <div class="topic-t">Платёжная инфраструктура</div>
+        <div class="topic-d">СБП, SWIFT, PIX, карточные схемы, BigTech в платежах. Кто контролирует рельсы</div>
+        <div class="topic-arr">→</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-n">06</div>
+        <div class="topic-t">Регулирование</div>
+        <div class="topic-d">Правовые рамки, AML/KYC, финальность расчётов, лицензирование. Как право определяет архитектуру</div>
+        <div class="topic-arr">→</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-n">07</div>
+        <div class="topic-t">Трансграничные расчёты</div>
+        <div class="topic-d">Дедолларизация, mBridge, BRICS Pay, корреспондентские сети. Как меняется глобальная система</div>
+        <div class="topic-arr">→</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-n">08</div>
+        <div class="topic-t">DvP / PvP</div>
+        <div class="topic-d">Расчётные механизмы: поставка против платежа, платёж против платежа во взаимодействии с финансовыми рынками</div>
+        <div class="topic-arr">→</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-n">09</div>
+        <div class="topic-t">Будущее денег</div>
+        <div class="topic-d">Денежная теория, роль центральных банков, новая архитектура денежной системы</div>
+        <div class="topic-arr">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RUBRICS ══ -->
+<section class="rubrics" id="rubrics">
+  <div class="container">
+    <div class="rubrics-head">
+      <div>
+        <div class="section-label" style="color:rgba(201,168,76,.6)">Структура контента</div>
+        <h2 class="section-title section-title-light" style="margin-top:8px">Рубрики</h2>
+      </div>
+      <a href="#materials" class="rubrics-link">Все материалы →</a>
+    </div>
+    <div class="rubrics-grid">
+      <div class="rubric-card">
+        <div class="rubric-tag rc-ab">Азбука</div>
+        <div class="rubric-t">Азбука</div>
+        <div class="rubric-d">Простые и точные объяснения ключевых понятий денежной инфраструктуры</div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-tag rc-pu">Пульс</div>
+        <div class="rubric-t">Пульс</div>
+        <div class="rubric-d">Короткие важные события — что произошло и что это реально означает</div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-tag rc-ra">Радар</div>
+        <div class="rubric-t">Радар</div>
+        <div class="rubric-d">Еженедельная карта смыслов: что важно, что шум, что упустили</div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-tag rc-go">Горизонт</div>
+        <div class="rubric-t">Горизонт</div>
+        <div class="rubric-d">Месячные и квартальные структурные тренды — что меняется в архитектуре</div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-tag rc-ko">Контур</div>
+        <div class="rubric-t">Контур</div>
+        <div class="rubric-d">Технологические и инфраструктурные разборы — как работает изнутри</div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-tag rc-rb">Разбор</div>
+        <div class="rubric-t">Разбор</div>
+        <div class="rubric-d">Аналитический разбор конкретного документа, доклада или рабочей бумаги</div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-tag rc-pr">Право</div>
+        <div class="rubric-t">Право</div>
+        <div class="rubric-d">Регулирование, правовые рамки, AML/KYC, финальность расчётов, лицензирование</div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-tag rc-fo">Фокус</div>
+        <div class="rubric-t">Фокус</div>
+        <div class="rubric-d">Одна страна, проект или организация — детальный разбор в центре внимания</div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-tag rc-mi">Мифы</div>
+        <div class="rubric-t">Мифы</div>
+        <div class="rubric-d">Разбор распространённых заблуждений: без полемики, с фактами</div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-tag rc-sc">Сценарии</div>
+        <div class="rubric-t">Сценарии</div>
+        <div class="rubric-d">Практические кейсы и возможные модели применения в реальных условиях</div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-tag rc-by">Быт</div>
+        <div class="rubric-t">Быт</div>
+        <div class="rubric-d">Объяснение через повседневные ситуации — без терминов, с конкретными примерами</div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-tag rc-gl">Голоса</div>
+        <div class="rubric-t">Голоса</div>
+        <div class="rubric-d">Важные сигналы от центробанков, BIS, МВФ — что и зачем они говорят</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MATERIALS ══ -->
+<section class="materials" id="materials">
+  <div class="container">
+    <div class="materials-head">
+      <div>
+        <div class="section-label">Последние публикации</div>
+        <h2 class="section-title">Материалы</h2>
+      </div>
+      <a href="#" class="all-link">Все материалы →</a>
+    </div>
+    <div class="materials-grid">
+      <!-- Featured -->
+      <div class="mat-card mat-card-featured">
+        <div class="mat-rubric">
+          <div class="mat-rubric-dot" style="background:#5DCAA5"></div>
+          <div class="mat-rubric-name">Разбор</div>
+        </div>
+        <div class="mat-t">Дискурс о платежах искажён структурно — не случайно. Разбор статьи Биндзайля (2026)</div>
+        <div class="mat-d">Пять причин, по которым объективного публичного обсуждения платёжной архитектуры не бывает: от технической сложности до асимметрии ресурсов между Visa ($630 млрд капитализации) и центральными банками.</div>
+        <div class="mat-meta">
+          <span>24 мая 2026</span>
+          <div class="mat-meta-sep"></div>
+          <span>12 мин чтения</span>
+        </div>
+        <span class="mat-tag">#цвцб</span>
+        <span class="mat-tag">#публичный-дискурс</span>
+        <span class="mat-tag">#платёжные-системы</span>
+        <div class="mat-arr">→</div>
+      </div>
+      <!-- Cards right -->
+      <div class="mat-card">
+        <div class="mat-rubric">
+          <div class="mat-rubric-dot" style="background:#C9A84C"></div>
+          <div class="mat-rubric-name">Пульс</div>
+        </div>
+        <div class="mat-t">ЕЦБ назвал новую дату решения по цифровому евро</div>
+        <div class="mat-meta">
+          <span>22 мая 2026</span>
+          <div class="mat-meta-sep"></div>
+          <span>4 мин</span>
+        </div>
+        <div class="mat-arr">→</div>
+      </div>
+      <div class="mat-card">
+        <div class="mat-rubric">
+          <div class="mat-rubric-dot" style="background:#85B7EB"></div>
+          <div class="mat-rubric-name">Контур</div>
+        </div>
+        <div class="mat-t">Как работает двухуровневая архитектура цифрового рубля</div>
+        <div class="mat-meta">
+          <span>20 мая 2026</span>
+          <div class="mat-meta-sep"></div>
+          <span>9 мин</span>
+        </div>
+        <div class="mat-arr">→</div>
+      </div>
+      <div class="mat-divider"></div>
+      <div class="mat-card">
+        <div class="mat-rubric">
+          <div class="mat-rubric-dot" style="background:#AFA9EC"></div>
+          <div class="mat-rubric-name">Азбука</div>
+        </div>
+        <div class="mat-t">Что такое расчётная финальность и почему она важна</div>
+        <div class="mat-meta">
+          <span>18 мая 2026</span>
+          <div class="mat-meta-sep"></div>
+          <span>7 мин</span>
+        </div>
+        <div class="mat-arr">→</div>
+      </div>
+      <div class="mat-card">
+        <div class="mat-rubric">
+          <div class="mat-rubric-dot" style="background:#FAC775"></div>
+          <div class="mat-rubric-name">Фокус</div>
+        </div>
+        <div class="mat-t">mBridge: архитектура, политика и геополитика в одном проекте</div>
+        <div class="mat-meta">
+          <span>15 мая 2026</span>
+          <div class="mat-meta-sep"></div>
+          <span>11 мин</span>
+        </div>
+        <div class="mat-arr">→</div>
+      </div>
+      <div class="mat-card">
+        <div class="mat-rubric">
+          <div class="mat-rubric-dot" style="background:#F5C4B3"></div>
+          <div class="mat-rubric-name">Мифы</div>
+        </div>
+        <div class="mat-t">«ЦВЦБ заменит банки» — разбираем этот миф по частям</div>
+        <div class="mat-meta">
+          <span>12 мая 2026</span>
+          <div class="mat-meta-sep"></div>
+          <span>8 мин</span>
+        </div>
+        <div class="mat-arr">→</div>
+      </div>
+    </div>
+    <div style="margin-top:32px;text-align:center">
+      <a href="#" class="all-link">Смотреть все материалы →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESEARCH ══ -->
+<section class="research" id="research">
+  <div class="container">
+    <div class="section-label">Глубокий анализ</div>
+    <h2 class="section-title" style="margin-top:8px">Исследования</h2>
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="research-card-banner"></div>
+        <div class="research-card-body">
+          <div class="research-tag">Исследование · Апрель 2026</div>
+          <div class="research-t">Публичный дискурс о розничных платежах и кейс ЦВЦБ</div>
+          <div class="research-d">Разбор статьи Биндзайля (2026): почему обсуждение платёжной архитектуры структурно предвзято и что это означает для оценки аргументов за и против ЦВЦБ.</div>
+          <div class="research-findings">
+            <div class="research-findings-label">Ключевые выводы</div>
+            <div class="research-finding">Экспертиза в платёжной отрасли концентрируется у заинтересованных сторон — нейтральных голосов структурно мало</div>
+            <div class="research-finding">Аргумент «рынок уже справляется» содержит скрытую предпосылку о том, что частная олигополия — оптимальный результат</div>
+            <div class="research-finding">PIX решает ~50% задач ЦВЦБ, но не обеспечивает якорную функцию ЦБ на розничном уровне</div>
+          </div>
+          <a href="index.html" class="research-cta" target="_blank">Читать полный разбор →</a>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="research-card" style="flex:1">
+          <div class="research-card-banner" style="background:linear-gradient(90deg,#4A6494,#0D1B3E)"></div>
+          <div class="research-card-body">
+            <div class="research-tag">Исследование · В разработке</div>
+            <div class="research-t">Цифровой рубль: архитектура и последствия для банков</div>
+            <div class="research-d">Системный анализ дизайна цифрового рубля: двухуровневая модель, холдинговые лимиты, роль банков как агентов.</div>
+            <div class="research-cta" style="opacity:.5;cursor:default">Готовится к публикации</div>
+          </div>
+        </div>
+        <div class="research-aside">
+          <div>
+            <div class="research-aside-t">Нужна аналитика под вашу задачу?</div>
+            <div class="research-aside-d">Подготовим исследование, справку или брифинг — адаптированные под вашу отрасль, аудиторию и конкретный вопрос.</div>
+          </div>
+          <a href="#order" class="research-aside-btn">Заказать исследование →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AUTHORS ══ -->
+<section class="authors" id="authors">
+  <div class="container">
+    <div class="section-label">Авторы</div>
+    <h2 class="section-title" style="margin-top:8px">Кто создаёт проект</h2>
+    <div class="authors-grid">
+      <div class="author-card">
+        <div class="author-avatar">ВМ</div>
+        <div class="author-info">
+          <div class="author-name">Вера Макарова</div>
+          <div class="author-role">Со-основатель, главный редактор</div>
+          <div class="author-bio">Специализация — денежная теория, цифровые валюты центральных банков, платёжная инфраструктура. Работает с первоисточниками: документами BIS, ЕЦБ, Банка России. Ведёт Telegram-канал @cbdc_monitor.</div>
+          <div class="author-links">
+            <a href="#" class="author-link">↗ Telegram</a>
+          </div>
+        </div>
+      </div>
+      <div class="author-card">
+        <div class="author-avatar">ЕО</div>
+        <div class="author-info">
+          <div class="author-name">Елизавета Оглоблина</div>
+          <div class="author-role">Со-основатель, стратегия</div>
+          <div class="author-bio">Специализация — регулирование цифровых финансов, токенизация, трансграничные расчёты. Работает с корпоративными клиентами и образовательными проектами в области цифровой экономики.</div>
+          <div class="author-links">
+            <a href="https://t.me/Elizaveta_Ogloblina" target="_blank" class="author-link">↗ @Elizaveta_Ogloblina</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOR WHOM ══ -->
+<section class="forwhom">
+  <div class="container">
+    <div class="forwhom-head">
+      <div class="section-label" style="color:rgba(201,168,76,.6)">Аудитория</div>
+      <h2 class="section-title section-title-light" style="margin-top:8px">Для кого</h2>
+      <p style="color:var(--blue-lt);margin-top:16px;max-width:600px;font-size:15px;line-height:1.7">«Архитектура денег» создана для людей, которым нужна не сводка новостей, а понимание процессов.</p>
+    </div>
+    <div class="forwhom-grid">
+      <div class="forwhom-card">
+        <div class="forwhom-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="1" stroke="#C9A84C" stroke-width="1.5"/><line x1="2" y1="8" x2="18" y2="8" stroke="#C9A84C" stroke-width="1.5"/></svg>
+        </div>
+        <div class="forwhom-t">Банки и финорганизации</div>
+        <div class="forwhom-d">Готовятся к внедрению цифрового рубля и хотят понять реальные последствия для бизнес-модели</div>
+      </div>
+      <div class="forwhom-card">
+        <div class="forwhom-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#C9A84C" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="forwhom-t">Финтех и платёжные компании</div>
+        <div class="forwhom-d">Ищут не заголовки, а архитектурное понимание изменений в инфраструктуре расчётов</div>
+      </div>
+      <div class="forwhom-card">
+        <div class="forwhom-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4h12v12H4z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/><line x1="7" y1="8" x2="13" y2="8" stroke="#C9A84C" stroke-width="1.5"/><line x1="7" y1="11" x2="11" y2="11" stroke="#C9A84C" stroke-width="1.5"/></svg>
+        </div>
+        <div class="forwhom-t">Регуляторы и юристы</div>
+        <div class="forwhom-d">Нужен системный разбор нормативных изменений, сравнительные кейсы, анализ первоисточников</div>
+      </div>
+      <div class="forwhom-card">
+        <div class="forwhom-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3L3 7v6l7 4 7-4V7l-7-4z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="forwhom-t">Исследователи и аналитики</div>
+        <div class="forwhom-d">Структурированная база материалов с источниками и аналитической рамкой</div>
+      </div>
+      <div class="forwhom-card">
+        <div class="forwhom-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 17V6l5-3 5 3v11" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/><rect x="8" y="12" width="4" height="5" stroke="#C9A84C" stroke-width="1.5"/></svg>
+        </div>
+        <div class="forwhom-t">Преподаватели и студенты</div>
+        <div class="forwhom-d">Структурированные объяснения, первоисточники, логика процессов — для учёбы и преподавания</div>
+      </div>
+      <div class="forwhom-card">
+        <div class="forwhom-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="#C9A84C" stroke-width="1.5"/><path d="M4 17c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="forwhom-t">Умный читатель</div>
+        <div class="forwhom-d">Хочет понять, что происходит с деньгами, без крипто-хайпа и без поверхностных упрощений</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section class="services" id="services">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end">
+      <div>
+        <div class="section-label">Форматы работы</div>
+        <h2 class="section-title" style="margin-top:8px">Услуги</h2>
+      </div>
+      <a href="#order" class="all-link">Заказать →</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-n">01 · Аналитика</div>
+        <div class="service-t">Аналитическое исследование</div>
+        <div class="service-d">Структурированный анализ конкретного вопроса — не общедоступный материал, а ответ на вашу задачу. Отчёт 10-40 страниц с выводами, схемами, источниками и executive summary.</div>
+        <div class="service-tags">
+          <span class="service-tag">Банки</span>
+          <span class="service-tag">Финтех</span>
+          <span class="service-tag">Юрфирмы</span>
+          <span class="service-tag">Корпорации</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+      <div class="service-card">
+        <div class="service-n">02 · Обучение</div>
+        <div class="service-t">Корпоративные программы</div>
+        <div class="service-d">Системное понимание темы для вашей команды — от однодневного воркшопа до курса из модулей. Форматы: очно, онлайн, гибрид. Адаптация под уровень аудитории.</div>
+        <div class="service-tags">
+          <span class="service-tag">Банки</span>
+          <span class="service-tag">Регуляторы</span>
+          <span class="service-tag">Казначейства</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+      <div class="service-card">
+        <div class="service-n">03 · Выступления</div>
+        <div class="service-t">Лекции и семинары</div>
+        <div class="service-d">Экспертное выступление для вашей аудитории: конференция, университет, корпоративное мероприятие. 45-90 минут с Q&A или панельная дискуссия.</div>
+        <div class="service-tags">
+          <span class="service-tag">Университеты</span>
+          <span class="service-tag">Конференции</span>
+          <span class="service-tag">Форумы</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+      <div class="service-card">
+        <div class="service-n">04 · Консультации</div>
+        <div class="service-t">Справки и консультации</div>
+        <div class="service-d">Быстрый структурированный ответ на конкретный вопрос: аналитическая справка 2-5 страниц за 3-5 дней или консультационная сессия 60-90 минут.</div>
+        <div class="service-tags">
+          <span class="service-tag">Медиа</span>
+          <span class="service-tag">Советы директоров</span>
+          <span class="service-tag">Стартапы</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TELEGRAM ══ -->
+<section class="telegram">
+  <div class="container">
+    <div class="telegram-inner">
+      <div class="telegram-left">
+        <div class="section-label">Оперативно</div>
+        <h2 class="section-title section-title-light">Мы в Telegram</h2>
+        <p>@cbdc_monitor — ежедневный мониторинг и разборы: цифровой рубль, ЦВЦБ, токенизация, платёжная инфраструктура. Короткие форматы — сигналы, которые нельзя пропустить.</p>
+        <a href="https://t.me/cbdc_monitor" target="_blank" class="btn-primary">Перейти в канал ↗</a>
+        <div class="telegram-url">t.me/cbdc_monitor</div>
+      </div>
+      <div class="tg-posts">
+        <div class="tg-post">
+          <div class="tg-post-tag">Пульс · 24 мая</div>
+          <div class="tg-post-t">Дискурс о платежах искажён структурно — не случайно</div>
+          <div class="tg-post-d">Пять причин, по которым нейтрального обсуждения платёжной архитектуры не бывает. Разбор Биндзайля (2026).</div>
+          <div class="tg-post-meta">Читать в Telegram →</div>
+        </div>
+        <div class="tg-post">
+          <div class="tg-post-tag">Голоса · 22 мая</div>
+          <div class="tg-post-t">ЕЦБ: «Цифровой евро — не альтернатива банковским депозитам»</div>
+          <div class="tg-post-d">Что скрывается за этой формулировкой и почему холдинговые лимиты — политическое решение.</div>
+          <div class="tg-post-meta">Читать в Telegram →</div>
+        </div>
+        <div class="tg-post">
+          <div class="tg-post-tag">Мифы · 20 мая</div>
+          <div class="tg-post-t">«Apple Pay — просто интерфейс». Почему это неправда</div>
+          <div class="tg-post-d">Контроль NFC на 1,5 млрд устройств и миллиарды на интерчейндже — это не интерфейс.</div>
+          <div class="tg-post-meta">Читать в Telegram →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ORDER ══ -->
+<section class="order" id="order">
+  <div class="container">
+    <div class="order-inner">
+      <div class="order-left">
+        <div class="section-label" style="color:rgba(201,168,76,.6)">Работа с проектом</div>
+        <h2 class="section-title section-title-light">Нужна аналитика<br>под вашу задачу?</h2>
+        <p>Подготовим исследование, аналитическую справку или обучающую программу — адаптированные под вашу отрасль, аудиторию и конкретный вопрос. Ответим в течение суток.</p>
+        <a href="https://t.me/Elizaveta_Ogloblina" target="_blank" class="btn-primary">Написать в Telegram →</a>
+        <div style="margin-top:32px;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)">
+          <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px">Что мы делаем</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span>Аналитические исследования 10-40 страниц</div>
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span>Корпоративное обучение и лекции</div>
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span>Аналитические справки за 3-5 дней</div>
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.55)"><span style="color:var(--gold);flex-shrink:0">○</span>Консультации и экспертные комментарии</div>
+          </div>
+        </div>
+      </div>
+      <div class="order-right">
+        <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:20px">Форма запроса</div>
+        <form class="order-form" onsubmit="handleSubmit(event)">
+          <div class="order-form-row">
+            <div class="order-form-group">
+              <div class="order-form-label">Ваше имя</div>
+              <input type="text" placeholder="Имя" required>
+            </div>
+            <div class="order-form-group">
+              <div class="order-form-label">Организация</div>
+              <input type="text" placeholder="Компания / вуз">
+            </div>
+          </div>
+          <div class="order-form-group">
+            <div class="order-form-label">Email или Telegram</div>
+            <input type="text" placeholder="email@example.com или @username" required>
+          </div>
+          <div class="order-form-group">
+            <div class="order-form-label">Тип запроса</div>
+            <select required>
+              <option value="" disabled selected>Выберите...</option>
+              <option>Лекция / выступление</option>
+              <option>Аналитическое исследование</option>
+              <option>Аналитическая справка</option>
+              <option>Корпоративное обучение</option>
+              <option>Комментарий для медиа</option>
+              <option>Партнёрство</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="order-form-group">
+            <div class="order-form-label">Опишите запрос</div>
+            <textarea placeholder="Вопрос, тема, аудитория, контекст, пожелания по срокам..."></textarea>
+          </div>
+          <button type="submit" class="order-submit">Отправить запрос</button>
+          <div class="order-note">Ответим в течение 24 часов — по email или в Telegram</div>
+        </form>
+        <div id="form-success" style="display:none;text-align:center;padding:40px 20px">
+          <div style="font-size:32px;margin-bottom:16px">✓</div>
+          <div style="font-family:var(--serif);font-size:20px;color:var(--white);margin-bottom:10px">Заявка отправлена</div>
+          <div style="font-size:14px;color:rgba(255,255,255,.5)">Ответим в течение суток</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-mark" style="width:40px;height:40px;margin-bottom:20px">
+          <svg viewBox="0 0 18 18" fill="none" width="20" height="20">
+            <rect x="1" y="1" width="7" height="7" stroke="#C9A84C" stroke-width="1.5"/>
+            <rect x="10" y="1" width="7" height="7" stroke="#C9A84C" stroke-width="1.5" opacity=".5"/>
+            <rect x="1" y="10" width="7" height="7" stroke="#C9A84C" stroke-width="1.5" opacity=".5"/>
+            <line x1="10" y1="10" x2="17" y2="17" stroke="#C9A84C" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="footer-brand-name">Архитектура денег</div>
+        <div class="footer-brand-sub">Независимая экспертная платформа о цифровых деньгах и платёжной инфраструктуре</div>
+        <a href="https://t.me/cbdc_monitor" target="_blank" class="footer-tg">↗ t.me/cbdc_monitor</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Материалы</div>
+        <div class="footer-links">
+          <a href="#">Все материалы</a>
+          <a href="#">Азбука</a>
+          <a href="#">Разбор</a>
+          <a href="#">Контур</a>
+          <a href="#">Право</a>
+          <a href="#">Мифы</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Темы</div>
+        <div class="footer-links">
+          <a href="#">Цифровой рубль</a>
+          <a href="#">ЦВЦБ / CBDC</a>
+          <a href="#">Токенизация</a>
+          <a href="#">Стейблкоины</a>
+          <a href="#">Регулирование</a>
+          <a href="#">Трансграничные</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Проект</div>
+        <div class="footer-links">
+          <a href="#about-proj">О проекте</a>
+          <a href="#authors">Авторы</a>
+          <a href="#services">Услуги</a>
+          <a href="#order">Заказать</a>
+          <a href="index.html">Разбор Биндзайля →</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2024–2026 Архитектура денег · Независимый экспертный проект ·
+        <a href="#">Политика конфиденциальности</a>
+      </div>
+      <div class="footer-copy">
+        <a href="https://t.me/cbdc_monitor" target="_blank">@cbdc_monitor</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ PROTOTYPE BADGE ══ -->
+<div class="badge-proto">Прототип · Май 2026</div>
+
+<script>
+// Nav scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Form submit
+function handleSubmit(e) {
+  e.preventDefault();
+  e.target.style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+
+// Smooth reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll(
+  '.topic-card, .rubric-card, .mat-card, .author-card, .forwhom-card, .service-card, .research-card, .tg-post, .about-principle'
+).forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(16px)';
+  el.style.transition = 'opacity .4s ease, transform .4s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
