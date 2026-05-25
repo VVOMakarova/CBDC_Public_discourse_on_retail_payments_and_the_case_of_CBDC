@@ -539,92 +539,8 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
       </div>
       <a href="#" class="all-link">Все материалы →</a>
     </div>
-    <div class="materials-grid">
-      <!-- Featured -->
-      <div class="mat-card mat-card-featured">
-        <div class="mat-rubric">
-          <div class="mat-rubric-dot" style="background:#5DCAA5"></div>
-          <div class="mat-rubric-name">Разбор</div>
-        </div>
-        <div class="mat-t">Дискурс о платежах искажён структурно — не случайно. Разбор статьи Биндзайля (2026)</div>
-        <div class="mat-d">Пять причин, по которым объективного публичного обсуждения платёжной архитектуры не бывает: от технической сложности до асимметрии ресурсов между Visa ($630 млрд капитализации) и центральными банками.</div>
-        <div class="mat-meta">
-          <span>24 мая 2026</span>
-          <div class="mat-meta-sep"></div>
-          <span>12 мин чтения</span>
-        </div>
-        <span class="mat-tag">#цвцб</span>
-        <span class="mat-tag">#публичный-дискурс</span>
-        <span class="mat-tag">#платёжные-системы</span>
-        <div class="mat-arr">→</div>
-      </div>
-      <!-- Cards right -->
-      <div class="mat-card">
-        <div class="mat-rubric">
-          <div class="mat-rubric-dot" style="background:#C9A84C"></div>
-          <div class="mat-rubric-name">Пульс</div>
-        </div>
-        <div class="mat-t">ЕЦБ назвал новую дату решения по цифровому евро</div>
-        <div class="mat-meta">
-          <span>22 мая 2026</span>
-          <div class="mat-meta-sep"></div>
-          <span>4 мин</span>
-        </div>
-        <div class="mat-arr">→</div>
-      </div>
-      <div class="mat-card">
-        <div class="mat-rubric">
-          <div class="mat-rubric-dot" style="background:#85B7EB"></div>
-          <div class="mat-rubric-name">Контур</div>
-        </div>
-        <div class="mat-t">Как работает двухуровневая архитектура цифрового рубля</div>
-        <div class="mat-meta">
-          <span>20 мая 2026</span>
-          <div class="mat-meta-sep"></div>
-          <span>9 мин</span>
-        </div>
-        <div class="mat-arr">→</div>
-      </div>
-      <div class="mat-divider"></div>
-      <div class="mat-card">
-        <div class="mat-rubric">
-          <div class="mat-rubric-dot" style="background:#AFA9EC"></div>
-          <div class="mat-rubric-name">Азбука</div>
-        </div>
-        <div class="mat-t">Что такое расчётная финальность и почему она важна</div>
-        <div class="mat-meta">
-          <span>18 мая 2026</span>
-          <div class="mat-meta-sep"></div>
-          <span>7 мин</span>
-        </div>
-        <div class="mat-arr">→</div>
-      </div>
-      <div class="mat-card">
-        <div class="mat-rubric">
-          <div class="mat-rubric-dot" style="background:#FAC775"></div>
-          <div class="mat-rubric-name">Фокус</div>
-        </div>
-        <div class="mat-t">mBridge: архитектура, политика и геополитика в одном проекте</div>
-        <div class="mat-meta">
-          <span>15 мая 2026</span>
-          <div class="mat-meta-sep"></div>
-          <span>11 мин</span>
-        </div>
-        <div class="mat-arr">→</div>
-      </div>
-      <div class="mat-card">
-        <div class="mat-rubric">
-          <div class="mat-rubric-dot" style="background:#F5C4B3"></div>
-          <div class="mat-rubric-name">Мифы</div>
-        </div>
-        <div class="mat-t">«ЦВЦБ заменит банки» — разбираем этот миф по частям</div>
-        <div class="mat-meta">
-          <span>12 мая 2026</span>
-          <div class="mat-meta-sep"></div>
-          <span>8 мин</span>
-        </div>
-        <div class="mat-arr">→</div>
-      </div>
+    <div class="materials-grid" id="mat-grid">
+      <!-- заполняется из массива ARTICLES в конце файла -->
     </div>
     <div style="margin-top:32px;text-align:center">
       <a href="#" class="all-link">Смотреть все материалы →</a>
@@ -833,25 +749,8 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
         <a href="https://t.me/cbdc_monitor" target="_blank" class="btn-primary">Перейти в канал ↗</a>
         <div class="telegram-url">t.me/cbdc_monitor</div>
       </div>
-      <div class="tg-posts">
-        <div class="tg-post">
-          <div class="tg-post-tag">Пульс · 24 мая</div>
-          <div class="tg-post-t">Дискурс о платежах искажён структурно — не случайно</div>
-          <div class="tg-post-d">Пять причин, по которым нейтрального обсуждения платёжной архитектуры не бывает. Разбор Биндзайля (2026).</div>
-          <div class="tg-post-meta">Читать в Telegram →</div>
-        </div>
-        <div class="tg-post">
-          <div class="tg-post-tag">Голоса · 22 мая</div>
-          <div class="tg-post-t">ЕЦБ: «Цифровой евро — не альтернатива банковским депозитам»</div>
-          <div class="tg-post-d">Что скрывается за этой формулировкой и почему холдинговые лимиты — политическое решение.</div>
-          <div class="tg-post-meta">Читать в Telegram →</div>
-        </div>
-        <div class="tg-post">
-          <div class="tg-post-tag">Мифы · 20 мая</div>
-          <div class="tg-post-t">«Apple Pay — просто интерфейс». Почему это неправда</div>
-          <div class="tg-post-d">Контроль NFC на 1,5 млрд устройств и миллиарды на интерчейндже — это не интерфейс.</div>
-          <div class="tg-post-meta">Читать в Telegram →</div>
-        </div>
+      <div class="tg-posts" id="tg-posts-list">
+        <!-- заполняется из массива TG_POSTS в конце файла -->
       </div>
     </div>
   </div>
@@ -989,20 +888,209 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 
 <div class="badge-proto">Прототип · Май 2026</div>
 
 <script>
-// Nav scroll effect
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  ДОБАВИТЬ НОВЫЙ МАТЕРИАЛ                                     ║
+// ║  → вставьте объект в начало массива ARTICLES ниже            ║
+// ║  → сайт автоматически покажет последние 6 материалов         ║
+// ╚══════════════════════════════════════════════════════════════╝
+//
+// Поля объекта:
+//   title    — заголовок (обязательно)
+//   rubric   — одна из рубрик (обязательно):
+//              Азбука / Пульс / Радар / Горизонт / Контур / Разбор /
+//              Право / Фокус / Мифы / Сценарии / Быт / Голоса
+//   date     — дата публикации, строка: "25 мая 2026"
+//   readTime — время чтения: "7 мин"
+//   desc     — краткое описание (показывается только на большой карточке)
+//   tags     — теги: ["#цвцб", "#регулирование"]
+//   url      — ссылка на материал или пост в Telegram
+//   featured — true → эта карточка будет большой (только одна)
+
+const ARTICLES = [
+
+  // ── ДОБАВЛЯЙТЕ НОВЫЕ ЗАПИСИ СЮДА ▼ ──────────────────────────
+
+  {
+    title:    'Дискурс о платежах искажён структурно — не случайно. Разбор статьи Биндзайля (2026)',
+    rubric:   'Разбор',
+    date:     '24 мая 2026',
+    readTime: '12 мин',
+    desc:     'Пять причин, по которым объективного публичного обсуждения платёжной архитектуры не бывает: от технической сложности до асимметрии ресурсов между Visa ($630 млрд капитализации) и центральными банками.',
+    tags:     ['#цвцб', '#публичный-дискурс', '#платёжные-системы'],
+    url:      'index.html',
+    featured: true,
+  },
+  {
+    title:    'ЕЦБ назвал новую дату решения по цифровому евро',
+    rubric:   'Пульс',
+    date:     '22 мая 2026',
+    readTime: '4 мин',
+    url:      'https://t.me/cbdc_monitor',
+  },
+  {
+    title:    'Как работает двухуровневая архитектура цифрового рубля',
+    rubric:   'Контур',
+    date:     '20 мая 2026',
+    readTime: '9 мин',
+    url:      '#',
+  },
+  {
+    title:    'Что такое расчётная финальность и почему она важна',
+    rubric:   'Азбука',
+    date:     '18 мая 2026',
+    readTime: '7 мин',
+    url:      '#',
+  },
+  {
+    title:    'mBridge: архитектура, политика и геополитика в одном проекте',
+    rubric:   'Фокус',
+    date:     '15 мая 2026',
+    readTime: '11 мин',
+    url:      '#',
+  },
+  {
+    title:    '«ЦВЦБ заменит банки» — разбираем этот миф по частям',
+    rubric:   'Мифы',
+    date:     '12 мая 2026',
+    readTime: '8 мин',
+    url:      '#',
+  },
+
+  // ─────────────────────────────────────────────────────────────
+];
+
+
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  ДОБАВИТЬ ПОСТ В TELEGRAM-БЛОК                               ║
+// ║  → вставьте объект в начало массива TG_POSTS                 ║
+// ╚══════════════════════════════════════════════════════════════╝
+//
+// Поля: rubric / date / title / desc / url
+
+const TG_POSTS = [
+
+  // ── ДОБАВЛЯЙТЕ НОВЫЕ ЗАПИСИ СЮДА ▼ ──────────────────────────
+
+  {
+    rubric: 'Разбор',
+    date:   '24 мая',
+    title:  'Дискурс о платежах искажён структурно — не случайно',
+    desc:   'Пять причин, по которым нейтрального обсуждения платёжной архитектуры не бывает. Разбор Биндзайля (2026).',
+    url:    'https://t.me/cbdc_monitor',
+  },
+  {
+    rubric: 'Голоса',
+    date:   '22 мая',
+    title:  'ЕЦБ: «Цифровой евро — не альтернатива банковским депозитам»',
+    desc:   'Что скрывается за этой формулировкой и почему холдинговые лимиты — политическое решение.',
+    url:    'https://t.me/cbdc_monitor',
+  },
+  {
+    rubric: 'Мифы',
+    date:   '20 мая',
+    title:  '«Apple Pay — просто интерфейс». Почему это неправда',
+    desc:   'Контроль NFC на 1,5 млрд устройств и миллиарды на интерчейндже — это не интерфейс.',
+    url:    'https://t.me/cbdc_monitor',
+  },
+
+  // ─────────────────────────────────────────────────────────────
+];
+
+
+// ══ ЦВЕТА РУБРИК (не менять без смены бренда) ══════════════════
+const RUBRICS = {
+  'Азбука':   '#AFA9EC',
+  'Пульс':    '#C9A84C',
+  'Радар':    '#85B7EB',
+  'Горизонт': '#9EB5D0',
+  'Контур':   '#85B7EB',
+  'Разбор':   '#5DCAA5',
+  'Право':    '#70A8D8',
+  'Фокус':    '#FAC775',
+  'Мифы':     '#F5C4B3',
+  'Сценарии': '#90C890',
+  'Быт':      '#B0BAC8',
+  'Голоса':   '#D4B870',
+};
+
+
+// ══ РЕНДЕР МАТЕРИАЛОВ ══════════════════════════════════════════
+function renderMaterials() {
+  const grid = document.getElementById('mat-grid');
+  if (!grid) return;
+
+  const featIdx = ARTICLES.findIndex(a => a.featured);
+  const fi = featIdx >= 0 ? featIdx : 0;
+  const featured = ARTICLES[fi];
+  const rest = ARTICLES.filter((_, i) => i !== fi).slice(0, 5);
+  const fc = RUBRICS[featured.rubric] || '#8FA8C8';
+
+  let html = `
+    <a class="mat-card mat-card-featured" href="${featured.url || '#'}">
+      <div class="mat-rubric">
+        <div class="mat-rubric-dot" style="background:${fc}"></div>
+        <div class="mat-rubric-name">${featured.rubric}</div>
+      </div>
+      <div class="mat-t">${featured.title}</div>
+      ${featured.desc ? `<div class="mat-d">${featured.desc}</div>` : ''}
+      <div class="mat-meta">
+        <span>${featured.date}</span>
+        <div class="mat-meta-sep"></div>
+        <span>${featured.readTime} чтения</span>
+      </div>
+      ${(featured.tags || []).map(t => `<span class="mat-tag">${t}</span>`).join('')}
+      <div class="mat-arr">→</div>
+    </a>`;
+
+  rest.forEach((a, i) => {
+    if (i === 2) html += `<div class="mat-divider"></div>`;
+    const c = RUBRICS[a.rubric] || '#8FA8C8';
+    html += `
+    <a class="mat-card" href="${a.url || '#'}">
+      <div class="mat-rubric">
+        <div class="mat-rubric-dot" style="background:${c}"></div>
+        <div class="mat-rubric-name">${a.rubric}</div>
+      </div>
+      <div class="mat-t">${a.title}</div>
+      <div class="mat-meta">
+        <span>${a.date}</span>
+        <div class="mat-meta-sep"></div>
+        <span>${a.readTime}</span>
+      </div>
+      <div class="mat-arr">→</div>
+    </a>`;
+  });
+
+  grid.innerHTML = html;
+}
+
+
+// ══ РЕНДЕР TELEGRAM-ПОСТОВ ══════════════════════════════════════
+function renderTgPosts() {
+  const list = document.getElementById('tg-posts-list');
+  if (!list) return;
+  list.innerHTML = TG_POSTS.slice(0, 3).map(p => `
+    <a class="tg-post" href="${p.url || 'https://t.me/cbdc_monitor'}" target="_blank">
+      <div class="tg-post-tag">${p.rubric} · ${p.date}</div>
+      <div class="tg-post-t">${p.title}</div>
+      <div class="tg-post-d">${p.desc}</div>
+      <div class="tg-post-meta">Читать в Telegram →</div>
+    </a>`).join('');
+}
+
+
+// ══ НАВИГАЦИЯ / ФОРМА / АНИМАЦИЯ ════════════════════════════════
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 40);
 });
 
-// Form submit
 function handleSubmit(e) {
   e.preventDefault();
   e.target.style.display = 'none';
   document.getElementById('form-success').style.display = 'block';
 }
 
-// Smooth reveal on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -1012,14 +1100,22 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll(
-  '.topic-card, .rubric-card, .mat-card, .author-card, .forwhom-card, .service-card, .research-card, .tg-post, .about-principle'
-).forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(16px)';
-  el.style.transition = 'opacity .4s ease, transform .4s ease';
-  observer.observe(el);
-});
+function observeCards() {
+  document.querySelectorAll(
+    '.topic-card, .rubric-card, .mat-card, .author-card, ' +
+    '.forwhom-card, .service-card, .research-card, .tg-post, .about-principle'
+  ).forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity .4s ease, transform .4s ease';
+    observer.observe(el);
+  });
+}
+
+// ══ ИНИЦИАЛИЗАЦИЯ ══════════════════════════════════════════════
+renderMaterials();
+renderTgPosts();
+observeCards();
 </script>
 </body>
 </html>
